@@ -1,0 +1,15 @@
+Text processing - split into several substrings (ethyl -> eth + yl, propane -> prop + ane)
+  Different types of molecules (iso- prefix?) https://en.wikipedia.org/wiki/IUPAC_nomenclature_of_organic_chemistry
+    Alkanes
+      Cyclical
+    Alkenes/ynes
+      Cyclical
+    Alcohols
+      Ketone
+      Carboxylic acids
+    Aldehydes 
+    Ethers (informal endings)
+    Esters
+    Amines
+    Amides
+    Nitriles
