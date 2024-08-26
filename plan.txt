@@ -1,4 +1,11 @@
-Text processing - split into several substrings (ethyl -> eth + yl, propane -> prop + ane)
+Settings - Allow selections of which molecules, difficulties, 
+
+Image Creation - Generate molecules with javascript
+  Different hints?
+
+Presets
+
+Text processing - split into several substrings (ethyl -> eth + yl, 2, 2-dimethyl propane -> 2, 2- + di + prop + ane), color, branches
   Different types of molecules (iso- prefix?) https://en.wikipedia.org/wiki/IUPAC_nomenclature_of_organic_chemistry
     Alkanes
       Cyclical
@@ -13,3 +20,6 @@ Text processing - split into several substrings (ethyl -> eth + yl, propane -> p
     Amines
     Amides
     Nitriles
+
+Record guesses - keep text box moving
+  Press enter instead of button?
