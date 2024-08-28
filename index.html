@@ -8,13 +8,19 @@
   
   <script type="text/JavaScript"> 
       function showGuess(){
-         let inputText = document.getElementById("guess").value;
-         alert(inputText);
+         let inputText = document.getElementById("guessInput").value;
+         document.getElementById("guess1").innerHTML = inputText;
       }
   </script>
   
   <body>
-    <input type="text" id="guess" name="guess" required minlength="4" maxlength="24" size="10" />
+    <p id="guess1"></p>
+    <p id="guess2"></p>
+    <p id="guess3"></p>
+    <p id="guess4"></p>
+    <p id="guess5"></p>
+    <p id="guess6"></p>
+    <input type="text" id="guessInput" name="guessInput" required minlength="4" maxlength="24" size="10" />
     <input type="button" 
           onclick="showGuess();" 
           name="submitButton" 
