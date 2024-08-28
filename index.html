@@ -2,22 +2,23 @@
 <html>
   <head>
     <title>Chemicle</title>
-    <h1>Computer Science Project by Wesley Ding</h1>
+    <h1>Chemicle</h1>
+    <h2>Computer Science Project by Wesley Ding</h2>
   </head>
   
   <script type="text/JavaScript"> 
-      function Hello(){
-         let theText = document.getElementById("name").value;
-         alert(theText);
+      function showGuess(){
+         let inputText = document.getElementById("guess").value;
+         alert(inputText);
       }
   </script>
   
   <body>
+    <input type="text" id="name" name="name" required minlength="4" maxlength="24" size="10" />
     <input type="button" 
-          onclick="Hello();" 
-          name="ok" 
-          value="Click Me" />
-    <input type="text" id="name" name="name" required minlength="4" maxlength="8" size="10" />
+          onclick="showGuess();" 
+          name="submitButton" 
+          value="Submit" />
   </body>
 </html>
 
