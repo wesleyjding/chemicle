@@ -1,7 +1,7 @@
 Settings - Allow selections of which molecules, difficulties, 
 
 Image Creation - Generate molecules with javascript
-  Different hints?
+  Different hints - formula, line structure, lewis structure, numbered, highlighted fun groups/major structures
 
 Presets
 
