@@ -7,7 +7,7 @@ Presets
 
 Text processing - split into several substrings (ethyl -> eth + yl, 2, 2-dimethyl propane -> 2, 2- + di + prop + ane), color, branches
   CHECK VALIDITY OF GUESS
-  Color - Green for correct, orange for correct but in wrong place/order, red for wrong & not in name
+  Color - Green for correct, yellow for correct but in wrong place/order, red for wrong & not in name
   Different types of molecules (iso- prefix?) https://en.wikipedia.org/wiki/IUPAC_nomenclature_of_organic_chemistry
     Alkanes
       -ane, -yl
