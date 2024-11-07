@@ -63,9 +63,8 @@
         "fluoro", "chloro", "bromo", "iodo",                                      // Halides
         "oxy", "hydroxy", "amino", "oxo", "anol", "anal", "anone", "anoic",       // Functional groups
         "acid", "oate", "anoate", "ether",  "nitrile",                            // More functional groups
-        "1-", "2-", "3-", "4-", "5-", "6-", "7-", "8-", "9-",                     // Positions (1-9)
-        "1,", "2,", "3,", "4,", "5,", "6,", "7,", "8,", "9,",                     // Positions with comma
-        "-", "an", "ol", "one", "a",                                              // "Cool" spelling (e.g. propan-2-ol)
+        "1", "2", "3", "4", "5", "6", "7", "8", "9", ",", "-",                    // Positions (1-9)
+        "an", "ol", "one", "a",                                                   // "Cool" spelling (e.g. propan-2-ol)
       ];
 
       // Remove whitespace from the input
@@ -175,13 +174,20 @@
 
     function showGuess(){
       let inputText = document.getElementById("guessInput").value;
-      console.log("Showing " + inputText);
+      //console.log("Showing " + inputText);
       displayColoredText(curSplit, splitOrganicString(trueMolecule), curGuessNum)
-      //document.getElementById("guess" + curGuess).innerHTML = curSplit;
+
+      // Clear input box
       document.getElementById("guessInput").value = "";
-      if(curGuessNum < 6) {
-        curGuessNum++;
-      }
+
+      // Increment guess number
+      curGuessNum++;
+
+      // Add new div
+      const newDiv = document.createElement("div");
+      newDiv.id = "guess" + curGuessNum;
+      const lastDiv = document.getElementById("guess" + (curGuessNum - 1));
+      lastDiv.parentNode.insertBefore(newDiv, lastDiv.nextSibling);
     }
 
     /*function isValidOrganicChemical(name)  {
@@ -226,11 +232,6 @@
   
   <body>
     <div id="guess1"></div>
-    <div id="guess2"></div>
-    <div id="guess3"></div>
-    <div id="guess4"></div>
-    <div id="guess5"></div>
-    <div id="guess6"></div>
     <form onsubmit="return handleSubmit();">
       <label for="guessInput"></label>
       <input type="text"
