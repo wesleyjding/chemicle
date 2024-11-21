@@ -78,9 +78,13 @@
     let curSplit = getCookie("curSplit");
 
     let curGuessNum = 1;
+
     if(getCookie("curGuessNum") !== "") {
-      for (let i = 1; i < getCookie("curGuessNum"); i++) {
-        showGuess(true)
+      guessNum = getCookie("curGuessNum");
+
+      for (let i = 1; i < guessNum; i++) {
+        curSplit = getCookie("guess" + guessNum);
+        showGuess(true);
       }
     }
 
@@ -92,7 +96,6 @@
       const output = splitOrganicString(inputText);
       if (output === false) {
         document.getElementById("validWarning").hidden = false;
-
         return false;
       } else {
         document.getElementById("validWarning").hidden = true;
@@ -179,10 +182,10 @@
         const d = new Date();
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
         let expires = "expires="+ d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/;SameSite=Strict";
       }
       else {
-        document.cookie = cname + "=" + cvalue + ";";
+        document.cookie = cname + "=" + cvalue + ";path=/;SameSite=Strict";
       }
 
     }
@@ -263,7 +266,7 @@
 
 
   <footer>
-    <p></p>
+    <p>This site uses locally stored cookies to maintain site functionality. No information is stored, sent, or communicated with any server, nor is any personal or private information collected.</p>
   </footer>
 </html>
 
