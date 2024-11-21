@@ -73,25 +73,19 @@
       return result;
     }
 
-    class Molecule {
+    let trueMolecule = "3-ethyl-2,4-dimethylpentane";
 
-      constructor(name) {
-        this._name = name;
-      }
+    let curSplit = getCookie("curSplit");
 
-      static formula() {
-
-      }
-
-      static split(name) {
-
+    let curGuessNum = 1;
+    if(getCookie("curGuessNum") !== "") {
+      for (let i = 1; i < getCookie("curGuessNum"); i++) {
+        showGuess(true)
       }
     }
 
-    let trueMolecule = "3-ethyl-2,4-dimethylpentane";
 
-    let curSplit = "";
-    let curGuessNum = 1;
+
 
     function handleSubmit() {
       const inputText = document.getElementById("guessInput").value;
@@ -103,6 +97,7 @@
       } else {
         document.getElementById("validWarning").hidden = true;
         curSplit = output;
+        setCookie("curSplit", curSplit)
         showGuess();
         return false;
       }
@@ -157,22 +152,56 @@
       outputDiv.appendChild(lengthMessage);
     }
 
-    function showGuess(){
-      let inputText = document.getElementById("guessInput").value;
-      //console.log("Showing " + inputText);
+    function showGuess(fromCookies = false){
       displayColoredText(curSplit, splitOrganicString(trueMolecule), curGuessNum)
-
+      if(!fromCookies) {
+        setCookie("guess" + curGuessNum, curSplit)
+      }
       // Clear input box
       document.getElementById("guessInput").value = "";
 
       // Increment guess number
       curGuessNum++;
+      if(!fromCookies) {
+        setCookie("curGuessNum", curGuessNum)
+      }
 
       // Add new div
       const newDiv = document.createElement("div");
       newDiv.id = "guess" + curGuessNum;
       const lastDiv = document.getElementById("guess" + (curGuessNum - 1));
       lastDiv.parentNode.insertBefore(newDiv, lastDiv.nextSibling);
+    }
+
+    // Modified from https://www.w3schools.com/js/js_cookies.asp
+    function setCookie(cname, cvalue, exdays = 1) {
+      if(exdays !== 0) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+      }
+      else {
+        document.cookie = cname + "=" + cvalue + ";";
+      }
+
+    }
+
+    // Used from https://www.w3schools.com/js/js_cookies.asp
+    function getCookie(cname) {
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(';');
+      for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) === 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
     }
 
     /*function isValidOrganicChemical(name)  {
@@ -221,7 +250,7 @@
              name="guessInput"
              required minlength="4"
              maxlength="64"
-             size="10" />
+             size="15" />
       <input type="submit"
              name="submitButton"
              value="Submit" />
