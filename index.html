@@ -79,17 +79,13 @@
 
     let curGuessNum = 1;
 
-    if(getCookie("curGuessNum") !== "") {
-      guessNum = getCookie("curGuessNum");
-
+    if(getCookie("curGuessNum") !== "" && getCookie("curGuessNum"> 1)){
+      let guessNum = getCookie("curGuessNum");
       for (let i = 1; i < guessNum; i++) {
         curSplit = getCookie("guess" + i);
         showGuess(true);
       }
     }
-
-
-
 
     function handleSubmit() {
       const inputText = document.getElementById("guessInput").value;
@@ -200,6 +196,7 @@
           c = c.substring(1);
         }
         if (c.indexOf(name) === 0) {
+          console.log("Cookie: " + cname + ", value: " + c.substring(name.length, c.length))
           return c.substring(name.length, c.length);
         }
       }
