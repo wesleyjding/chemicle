@@ -75,7 +75,7 @@
 
     let trueMolecule = "3-ethyl-2,4-dimethylpentane";
 
-    let curSplit = getCookie("curSplit");
+    let curSplit = "";
 
     let curGuessNum = 1;
 
@@ -83,7 +83,7 @@
       guessNum = getCookie("curGuessNum");
 
       for (let i = 1; i < guessNum; i++) {
-        curSplit = getCookie("guess" + guessNum);
+        curSplit = getCookie("guess" + i);
         showGuess(true);
       }
     }
@@ -100,7 +100,6 @@
       } else {
         document.getElementById("validWarning").hidden = true;
         curSplit = output;
-        setCookie("curSplit", curSplit)
         showGuess();
         return false;
       }
