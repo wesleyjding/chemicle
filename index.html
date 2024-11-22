@@ -82,7 +82,9 @@
       if(getCookie("curGuessNum") !== "" && getCookie("curGuessNum")> 1){
         let guessNum = getCookie("curGuessNum");
         for (let i = 1; i < guessNum; i++) {
-          curSplit = getCookie("guess" + i).split(',').map(item => item.trim());
+          curSplit = getCookie("guess" + i).split(',').map(item => item === "" ? "," : item).
+            filter((item, index, array) => item !== ',' || array[index - 1] !== ',');
+
           console.log("Updating guess" + i + " to " + curSplit)
           showGuess(true);
         }
