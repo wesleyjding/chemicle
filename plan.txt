@@ -4,6 +4,13 @@ Settings - Allow selections of which molecules, difficulties,
 Image Creation - Generate molecules with javascript
   Different hints - formula, line structure, lewis structure, numbered, highlighted fun groups/major structures
 
+IDs
+  Folder for each type (Alkanes, alkenes, etc)
+  List of all IDs in each folder
+  Take PubChem ID, text file 14040.txt
+  Line structure 14040-line.png
+  Lewis structure 14040-line.png
+  
 Presets
 
 Text processing - split into several substrings (ethyl -> eth + yl, 2, 2-dimethyl propane -> 2, 2- + di + prop + ane), color, branches
