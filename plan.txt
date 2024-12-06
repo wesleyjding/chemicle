@@ -5,11 +5,11 @@ Image Creation - Generate molecules with javascript
   Different hints - formula, line structure, lewis structure, numbered, highlighted fun groups/major structures
 
 IDs
-  Folder for each type (Alkanes, alkenes, etc)
-  List of all IDs in each folder
-  Take PubChem ID, text file 14040.txt
-  Line structure 14040-line.png
-  Lewis structure 14040-line.png
+  Ids in format alkane-001
+  Each category has own id text file, alkane-ids.txt
+  Text file alkane-001.txt (name, formula, smiles)
+  Line structure alkane-001-line.png
+  Lewis structure alkane-001-lewis.png
   
 Presets
 
