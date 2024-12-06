@@ -7,9 +7,10 @@ Image Creation - Generate molecules with javascript
 IDs
   Ids in format alkane-001
   Each category has own id text file, alkane-ids.txt
-  Text file alkane-001.txt (name, formula, smiles)
-  Line structure alkane-001-line.png
-  Lewis structure alkane-001-lewis.png
+  Id Folder alkane-001/   containing
+      Text file name.txt (name, formula, smiles)
+      Line structure line.png
+      Lewis structure lewis.png
   
 Presets
 
