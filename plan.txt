@@ -1,8 +1,17 @@
 Settings - Allow selections of which molecules, difficulties, 
+    Albritton mode - disables selection of different molecules
 
 Image Creation - Generate molecules with javascript
   Different hints - formula, line structure, lewis structure, numbered, highlighted fun groups/major structures
 
+IDs
+  Ids in format alkane-001
+  Each category has own id text file, alkane-ids.txt
+  Id Folder alkane-001/   containing
+      Text file name.txt (name, formula, smiles)
+      Line structure line.png
+      Lewis structure lewis.png
+  
 Presets
 
 Text processing - split into several substrings (ethyl -> eth + yl, 2, 2-dimethyl propane -> 2, 2- + di + prop + ane), color, branches
