@@ -1,1 +1,1 @@
-"2,3-dimethylpentane", "C7H16", "CCC(C)C(C)C"
+"3-ethyl-2-methylhexane", "C9H20", "CCCC(CC)C(C)C"

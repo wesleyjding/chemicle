@@ -1,1 +1,1 @@
-"3-ethyl-2,4-dimethylpentane", "C9H20", "CCC(C(C)C)C(C)C"
+"ethane", "C2H6", "CC"

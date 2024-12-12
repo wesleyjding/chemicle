@@ -1,1 +1,1 @@
-"2,2,4-trimethylpentane", "C8H18", "CC(C)CC(C)(C)C"
+"butane", "C4H10", "CCCC"

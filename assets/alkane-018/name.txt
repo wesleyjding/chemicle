@@ -1,1 +1,1 @@
-"4-isopropylheptane", "C10H22", "CCCC(CCC)C(C)C"
+"heptane", "C7H16", "CCCCCCC"

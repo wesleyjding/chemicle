@@ -1,1 +1,1 @@
-"3,3-diethylpentane", "C9H20", "CCC(CC)(CC)CC"
+"2,2-dimethylbutane", "C6H14", "CCC(C)(C)C"

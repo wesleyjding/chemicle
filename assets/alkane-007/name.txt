@@ -1,1 +1,1 @@
-"2,2-dimethylbutane", "C6H14", "CCC(C)(C)C"
+"pentane", "C5H12", "CCCCC"
