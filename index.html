@@ -253,7 +253,7 @@
 
         // If it's already past 5 AM GMT today, move to the next day
         if (now >= next5AM) {
-          next5AM += 24 * 60 * 60 * 1000;
+          next5AM = new Date(next5AM.getTime() + 24 * 60 * 60 * 1000);
         }
         let expires = "expires="+ next5AM.toUTCString();
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/;SameSite=Strict";
