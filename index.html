@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     .green { color: green; }
     .yellow { color: goldenrod; }
@@ -18,7 +20,6 @@
       display: block;
       margin-left: auto;
       margin-right: auto;
-      width: 50%;
     }
     html * {
       font-family: Calibri, Helvetica, Arial, sans-serif;
@@ -132,10 +133,44 @@
 
     let curSplit = "";
     let curGuessNum = 1;
+
+    let formulaButton;
+    let formulaDiv;
+    let lineButton;
+    let lineImage;
+    let lewisButton;
+    let lewisImage;
+
     document.addEventListener("DOMContentLoaded", async function () {
       while (!doneLoading) {
-        await new Promise(r => setTimeout(r, 50))
+        await new Promise(r => setTimeout(r, 10))
       }
+
+      formulaButton = document.getElementById('formulaButton');
+
+      formulaDiv = document.getElementById('formula');
+      formulaDiv.innerHTML = "Formula = " + formula;
+
+      lineButton = document.getElementById('lineButton');
+      lineImage = document.getElementById('line');
+      lineImage.src = "assets/" + id + "/line.png";
+
+      lewisButton = document.getElementById('lewisButton');
+      lewisImage = document.getElementById('lewis');
+      lewisImage.src = "assets/" + id + "/lewis.png";
+
+      formulaButton.addEventListener('click', () => {
+        toggleVisibility(formulaButton, formulaDiv, "Chemical Formula", false)
+      });
+
+      lineButton.addEventListener('click', () => {
+        toggleVisibility(lineButton, lineImage, "Line Structure")
+      });
+
+      lewisButton.addEventListener('click', () => {
+        toggleVisibility(lewisButton, lewisImage, "Lewis Structure")
+      });
+
       if (getCookie("curGuessNum") !== "" && getCookie("curGuessNum") > 1) {
         let guessNum = getCookie("curGuessNum");
         for (let i = 1; i < guessNum; i++) {
@@ -145,11 +180,31 @@
           showGuess(true);
         }
       }
-      document.getElementById("formula").innerHTML = "Formula = " + formula;
-      document.getElementById("line").src = "assets/" + id + "/line.png";
-      document.getElementById("lewis").src = "assets/" + id + "/lewis.png";
     });
 
+
+
+    function toggleVisibility(button, element, name, isImage = true) {
+      if(isImage) {
+        if (element.style.display === 'none' || element.style.display === '') {
+          element.style.display = 'block'; // Show the image
+          button.innerHTML = "Hide " + name;
+        } else {
+          element.style.display = 'none'; // Hide the image
+          button.innerHTML = "Show " + name;
+        }
+      }
+      else {
+        if (element.hidden === true) {
+          element.hidden = false; // Show the image
+          button.innerHTML = "Hide " + name;
+        } else {
+          element.hidden = true; // Hide the image
+          button.innerHTML = "Show " + name;
+        }
+      }
+
+    }
 
     function handleSubmit() {
       const inputText = document.getElementById("guessInput").value;
@@ -235,6 +290,17 @@
         setCookie("curGuessNum", curGuessNum)
       }
 
+      // Show corresponding hint
+      if(curGuessNum === 2) {
+        formulaButton.style.display = 'block';
+      }
+      else if(curGuessNum === 3) {
+        lineButton.style.display = 'block';
+      }
+      else if(curGuessNum === 4) {
+        lewisButton.style.display = 'block';
+      }
+
       // Add new div
       const newDiv = document.createElement("div");
       newDiv.id = "guess" + curGuessNum;
@@ -300,10 +366,18 @@
              value="Submit">
     </form>
     <p id="validWarning" hidden="hidden" style="color:red;text-align: center;">The input is invalid. Please check spelling and make sure your guess is a real molecule.</p>
-    <div id="formula" style="text-align: center; padding: 1%" ></div>
-    <img id="line" src="" alt="Line Structure of Molecule" class="center" style="width:10%; border: 2px solid">
-    <div style="padding: 1%"></div>
-    <img id="lewis" src="" alt="Lewis Structure of Molecule" class="center" style="width:10%; border: 2px solid">
+
+    <button id="formulaButton" style="text-align: center; display: none" class="center" >Show Chemical Formula</button>
+    <div style="padding: 0.6%"></div>
+    <div id="formula" style="text-align: center" hidden="hidden"></div>
+    <div style="padding: 0.6%"></div>
+    <button id="lineButton" style="text-align: center; display: none" class="center">Show Line Structure</button>
+    <div style="padding: 0.6%"></div>
+    <img id="line" src="" alt="Line Structure of Molecule" class="center" style="width:10%; border: 2px solid; display: none" >
+    <div style="padding: 0.6%"></div>
+    <button id="lewisButton" style="text-align: center; display: none" class="center" >Show Lewis Structure</button>
+    <div style="padding: 0.6%"></div>
+    <img id="lewis" src="" alt="Lewis Structure of Molecule" class="center" style="width:10%; border: 2px solid; display: none" >
 
   </body>
 
