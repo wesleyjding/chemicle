@@ -102,12 +102,21 @@
       // Convert milliseconds to days (1 day = 24 * 60 * 60 * 1000 ms)
       let diffInDays = Math.floor(diffInMs / (24 * 60 * 60 * 1000));
 
-      let t = (diffInDays ^ 0xDEADBEEF) + (diffInDays << 3);
-      t = (t ^ (t >>> 16)) * 0x85EBCA6B;
-      t = (t ^ (t >>> 13)) * 0xC2B2AE35;
-      t = t ^ (t >>> 16);
+      function random(seed, hasChecked = false) {
+        let t = (seed ^ 0xDEADBEEF) + (seed << 3);
+        t = (t ^ (t >>> 16)) * 0x85EBCA6B;
+        t = (t ^ (t >>> 13)) * 0xC2B2AE35;
+        t = t ^ (t >>> 16);
 
-      return (Math.abs(t) % maxValue) + 1;
+        // Quick check to ensure no repeats. Still a very small chance of a repeat on the day after an avoided repeat, but this occurring is very unlikely.
+        if(!hasChecked && t === random(seed-1, true)) {
+          // Adds large prime to ensure different value
+          return t + 999331;
+        }
+        return t;
+      }
+
+      return (Math.abs(random(diffInDays)) % maxValue) + 1;
     }
 
     const maxValue = 25;
