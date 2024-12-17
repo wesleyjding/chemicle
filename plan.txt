@@ -1,4 +1,6 @@
-Todo: Gradual reveal of hints, adding different types of molecules/additional ones, tutorial, Settings (all and albritton mode), phone format, general style improvements, logo (CH in chemicle?) icon, streaks, kofi?, congratulations and lockout after correct, infinite mode 
+Todo: adding different types of molecules/additional ones, tutorial, Settings (all and albritton mode), phone format, general style improvements, logo (CH in chemicle?) icon, streaks, kofi?, congratulations and lockout after correct, infinite mode 
+
+Done: Gradual reveal of hints
 
 Settings - Allow selections of which molecules, difficulties, 
     Albritton mode - disables selection of different molecules
