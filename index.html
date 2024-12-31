@@ -28,8 +28,6 @@
   </style>
   <head>
     <title>chemicle</title>
-    <h1 style="font-family: Calibri, Helvetica, Arial, sans-serif; text-align: center;
-      padding: 2px; position: static">chemicle</h1>
   </head>
   <script type="text/JavaScript">
 
@@ -102,7 +100,7 @@
       // Convert milliseconds to days (1 day = 24 * 60 * 60 * 1000 ms)
       let diffInDays = Math.floor(diffInMs / (24 * 60 * 60 * 1000));
 
-      function random(seed, hasChecked = false) {
+      function random(seed) {
         let t = (seed ^ 0xDEADBEEF) + (seed << 3);
         t = (t ^ (t >>> 16)) * 0x85EBCA6B;
         t = (t ^ (t >>> 13)) * 0xC2B2AE35;
@@ -135,10 +133,10 @@
               //console.log(splitString);
               trueMolecule = splitString[0].replaceAll("\"", "");
               formula = splitString[1].replaceAll("\"", "");
+              formula = formula.replaceAll(/(\d+)/g, '<sub>$1</sub>');
               doneLoading = true;
             })
             .catch((e) => console.error(e));
-
 
     let curSplit = "";
     let curGuessNum = 1;
@@ -190,8 +188,6 @@
         }
       }
     });
-
-
 
     function toggleVisibility(button, element, name, isImage = true) {
       if(isImage) {
@@ -282,6 +278,7 @@
       } else {
         lengthMessage.textContent = 'correct length';
       }
+      lengthMessage.setAttribute("style", "padding-bottom: 0.2%");
       outputDiv.appendChild(lengthMessage);
     }
 
@@ -356,10 +353,14 @@
       }
       return "";
     }
-
-
   </script>
+
+
+
+
   <body>
+    <h1 style="text-align: center;
+      padding: 0.1%; position: static; font-size: xx-large; "><b>chemicle</b></h1>
     <div id="guess1" style="text-align: center;"></div>
     <form onsubmit="return handleSubmit();"  style="text-align: center; padding: 1%">
 
@@ -383,16 +384,15 @@
     <button id="lineButton" style="text-align: center; display: none" class="center">Show Line Structure</button>
     <div style="padding: 0.6%"></div>
     <img id="line" src="" alt="Line Structure of Molecule" class="center" style="width:10%; border: 2px solid; display: none" >
-    <div style="padding: 0.6%"></div>
+    <div style="padding: 0.6%;"></div>
     <button id="lewisButton" style="text-align: center; display: none" class="center" >Show Lewis Structure</button>
     <div style="padding: 0.6%"></div>
     <img id="lewis" src="" alt="Lewis Structure of Molecule" class="center" style="width:10%; border: 2px solid; display: none" >
 
   </body>
 
-
-  <footer>
-    <p>This site uses locally stored cookies to maintain site functionality. No information is stored, sent, or communicated with any server, nor is any personal or private information collected.</p>
-  </footer>
+<!--  <footer>-->
+<!--    <p>This site uses locally stored cookies to maintain site functionality. No information is stored, sent, or communicated with any server, nor is any personal or private information collected.</p>-->
+<!--  </footer> -->
 </html>
 
