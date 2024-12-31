@@ -1,1 +1,1 @@
-"butane", "C4H10", "CCCC"
+"2-methylpropane", "C4H10", "CC(C)C"

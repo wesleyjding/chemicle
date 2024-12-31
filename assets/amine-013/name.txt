@@ -1,0 +1,1 @@
+"2-methylpentan-2-amine", "C6H15N", "CCCC(C)(C)N"

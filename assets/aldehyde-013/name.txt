@@ -1,0 +1,1 @@
+"2,2-dimethylpentanal", "C7H14O", "CCCC(C)(C)C=O"

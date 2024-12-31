@@ -1,0 +1,1 @@
+"3,3-dimethylbut-1-ene", "C6H12", "CC(C)(C)C=C"

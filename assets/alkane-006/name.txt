@@ -1,1 +1,1 @@
-"2,2,3-trimethylbutane", "C7H16", "CC(C)C(C)(C)C"
+"butane", "C4H10", "CCCC"

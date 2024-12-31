@@ -1,0 +1,1 @@
+"methyl acetate", "C3H6O2", "CC(=O)OC"

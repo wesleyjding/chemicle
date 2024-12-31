@@ -1,0 +1,1 @@
+"hexa-1,5-diene", "C6H10", "C=CCCC=C"

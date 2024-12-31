@@ -1,0 +1,1 @@
+"3-methylhexan-1-amine", "C7H17N", "CCCC(C)CCN"

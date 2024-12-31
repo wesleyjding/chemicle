@@ -1,0 +1,1 @@
+"2,2-dimethylpentan-1-amine", "C7H17N", "CCCC(C)(C)CN"

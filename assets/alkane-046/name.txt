@@ -1,0 +1,1 @@
+"3-ethyl-2-methylheptane", "C10H22", "CCCCC(CC)C(C)C"

@@ -1,0 +1,1 @@
+"3,4-diethyl-2,3-dimethylheptane", "C13H28", "CCCC(CC)C(C)(CC)C(C)C"

@@ -1,0 +1,1 @@
+"2-methylhexan-2-amine", "C7H17N", "CCCCC(C)(C)N"

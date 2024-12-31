@@ -1,0 +1,1 @@
+"3-ethyl-2-methylpent-1-ene", "C8H16", "CCC(CC)C(=C)C"

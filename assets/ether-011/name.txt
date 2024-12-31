@@ -1,0 +1,1 @@
+"1-ethoxybutane", "C6H14O", "CCCCOCC"

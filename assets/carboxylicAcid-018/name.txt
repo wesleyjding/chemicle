@@ -1,0 +1,1 @@
+"2,3-dimethylhexanoic acid", "C8H16O2", "CCCC(C)C(C)C(=O)O"

@@ -1,0 +1,1 @@
+"hexanedioic acid", "C6H10O4", "C(CCC(=O)O)CC(=O)O"

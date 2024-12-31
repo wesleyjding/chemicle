@@ -1,1 +1,1 @@
-"nonane", "C9H20", "CCCCCCCCC"
+"3-methylhexane", "C7H16", "CCCC(C)CC"

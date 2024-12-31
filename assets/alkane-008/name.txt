@@ -1,1 +1,1 @@
-"2,4-dimethylpentane", "C7H16", "CC(C)CC(C)C"
+"2,2-dimethylbutane", "C6H14", "CCC(C)(C)C"

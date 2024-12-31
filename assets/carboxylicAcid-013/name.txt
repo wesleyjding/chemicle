@@ -1,0 +1,1 @@
+"3,3-dimethylpentanoic acid", "C7H14O2", "CCC(C)(C)CC(=O)O"

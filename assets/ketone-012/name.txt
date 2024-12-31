@@ -1,0 +1,1 @@
+"hexane-2,4-dione", "C6H10O2", "CCC(=O)CC(=O)C"

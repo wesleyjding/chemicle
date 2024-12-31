@@ -1,0 +1,1 @@
+"2-methylpropanamide", "C4H9NO", "CC(C)C(=O)N"

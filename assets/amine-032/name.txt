@@ -1,0 +1,1 @@
+"2,3-dimethylhexan-3-amine", "C8H19N", "CCCC(C)(C(C)C)N"

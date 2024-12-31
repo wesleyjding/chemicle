@@ -1,1 +1,1 @@
-"2,2,3,3-tetramethylpentane", "C9H20", "CCC(C)(C)C(C)(C)C"
+"3-methylpentane", "C6H14", "CCC(C)CC"

@@ -1,0 +1,1 @@
+"2,3-dimethylpentanamide", "C7H15NO", "CCC(C)C(C)C(=O)N"

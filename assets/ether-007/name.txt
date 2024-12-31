@@ -1,0 +1,1 @@
+"2-ethoxy-2-methylpropane", "C6H14O", "CCOC(C)(C)C"

@@ -1,0 +1,1 @@
+"3-ethyl-2-methylhexane", "C9H20", "CCCC(CC)C(C)C"

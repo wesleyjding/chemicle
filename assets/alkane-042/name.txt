@@ -1,0 +1,1 @@
+"2,2,4-trimethylheptane", "C10H22", "CCCC(C)CC(C)(C)C"

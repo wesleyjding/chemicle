@@ -1,0 +1,1 @@
+"4-methylhex-2-yne", "C7H12", "CCC(C)C#CC"

@@ -1,0 +1,1 @@
+"butane-1,2-diol", "C4H10O2", "CCC(CO)O"

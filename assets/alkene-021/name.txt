@@ -1,0 +1,1 @@
+"2,5-dimethylhexa-2,4-diene", "C8H14", "CC(=CC=C(C)C)C"

@@ -1,0 +1,1 @@
+"2,3,3-trimethylhexane", "C9H20", "CCCC(C)(C)C(C)C"

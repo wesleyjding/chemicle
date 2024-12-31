@@ -1,0 +1,1 @@
+"2,2-dimethylhexan-1-amine", "C8H19N", "CCCCC(C)(C)CN"

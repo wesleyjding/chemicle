@@ -1,1 +1,1 @@
-"octane", "C8H18", "CCCCCCCC"
+"2,3,4-trimethylpentane", "C8H18", "CC(C)C(C)C(C)C"

@@ -1,0 +1,1 @@
+"2-ethoxypropane", "C5H12O", "CCOC(C)C"

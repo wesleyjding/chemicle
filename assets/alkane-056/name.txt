@@ -1,0 +1,1 @@
+"2,5-dimethyloctane", "C10H22", "CCCC(C)CCC(C)C"

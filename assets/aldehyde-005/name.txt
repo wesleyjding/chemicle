@@ -1,0 +1,1 @@
+"2,2-dimethylpropanal", "C5H10O", "CC(C)(C)C=O"

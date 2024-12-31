@@ -1,0 +1,1 @@
+"4-ethyl-3-methyloctane", "C11H24", "CCCCC(CC)C(C)CC"

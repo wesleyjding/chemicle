@@ -1,1 +1,1 @@
-"decane", "C10H22", "CCCCCCCCCC"
+"2,3-dimethylhexane", "C8H18", "CCCC(C)C(C)C"

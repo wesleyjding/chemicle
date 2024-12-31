@@ -1,0 +1,1 @@
+"1-(propoxymethoxy)propane", "C7H16O2", "CCCOCOCCC"

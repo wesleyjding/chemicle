@@ -1,0 +1,1 @@
+"3-methylbutane-1,2-diol", "C5H12O2", "CC(C)C(CO)O"

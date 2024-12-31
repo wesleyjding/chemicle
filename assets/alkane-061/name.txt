@@ -1,0 +1,1 @@
+"5-ethyl-2,4,6-trimethyloctane", "C13H28", "CCC(C)C(CC)C(C)CC(C)C"
