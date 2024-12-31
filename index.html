@@ -110,14 +110,16 @@
 
       let prevResult = (Math.abs(random(diffInDays - 1)) % maxValue) + 1
       let newResult = (Math.abs(random(diffInDays)) % maxValue) + 1
+
       // Quick check to ensure no repeats. Still a very small chance of a repeat on the day after an avoided repeat, but this occurring is very unlikely.
       if(prevResult === newResult) {
         // Adds large prime to ensure different value
         return ((Math.abs(random(diffInDays)) + 999331) % maxValue) + 1;
       }
+      return newResult;
     }
 
-    const maxValue = 25;
+    const maxValue = 72;
 
     let id;
     let trueMolecule;
@@ -369,7 +371,7 @@
              id="guessInput"
              name="guessInput"
              required minlength="4"
-             maxlength="64"
+             maxlength="40"
              size="15">
       <input type="submit"
              name="submitButton"
