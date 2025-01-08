@@ -121,14 +121,63 @@
       return newResult;
     }
 
-    const maxValue = 72;
+    const alkanesMax = 71;
+    const alkenesMax = 33;
+    const alkynesMax = 24;
+    const alcoholsMax = 12;
+    const ketonesMax = 13;
+    const carboxylicAcidsMax = 29;
+    const aldehydesMax = 28;
+    const ethersMax = 12;
+    const estersMax = 18;
+    const aminesMax = 32;
+    const amidesMax = 12;
+    const nitrilesMax = 4;
+    const miscsMax = 7;
+    const totalMax = alkanesMax + alkenesMax + alkynesMax + alcoholsMax + ketonesMax + carboxylicAcidsMax
+            + aldehydesMax + ethersMax + estersMax + aminesMax + amidesMax + nitrilesMax + miscsMax;
+
+    const typeList = ["alkane", "alkene", "alkyne", "alcohol", "ketone", "carboxylicAcid", "aldehyde",
+            "ether", "ester", "amine", "amide", "nitrile", "misc"];
 
     let id;
     let trueMolecule;
     let formula;
     let doneLoading = false;
-    let result = getDailyId(maxValue)
-    id = "alkane-" + (result+2).toString().padStart(3, "0");
+    let idNum = getDailyId(totalMax);
+    console.log(idNum);
+    let moleculeType;
+
+    function checkWithin (max, type) {
+      if(idNum <= max) {
+        moleculeType = type;
+        return true;
+      }
+      else {
+        idNum -= max;
+        return false;
+      }
+    }
+    for(let i = 0; i < typeList.length; i++) {
+      if(checkWithin(eval(typeList[i] + "sMax"), typeList[i])) {
+        break;
+      }
+    }
+    // checkWithin(alkanesMax, "alkane");
+    // checkWithin(alkenesMax, "alkene");
+    // checkWithin(alkynesMax, "alkyne");
+    // checkWithin(alcoholsMax, "alcohol");
+    // checkWithin(ketonesMax, "ketone");
+    // checkWithin(carboxylicAcidsMax, "carboxylicAcid");
+    // checkWithin(aldehydesMax, "aldehyde");
+    // checkWithin(ethersMax, "ether");
+    // checkWithin(estersMax, "ester");
+    // checkWithin(aminesMax, "amine");
+    // checkWithin(amidesMax, "amide");
+    // checkWithin(miscsMax, "misc");
+    id = moleculeType + "-" + (idNum+2).toString().padStart(3, "0");
+
+
     console.log(id);
     fetch("assets/" + id + "/name.txt")
             .then((res) => res.text())
@@ -182,10 +231,10 @@
         toggleVisibility(lewisButton, lewisImage, "Lewis Structure")
       });
 
-      if (getCookie("curGuessNum") !== "" && getCookie("curGuessNum") > 1) {
-        let guessNum = getCookie("curGuessNum");
+      if (getStorage("curGuessNum") !== "" && getStorage("curGuessNum") > 1) {
+        let guessNum = getStorage("curGuessNum");
         for (let i = 1; i < guessNum; i++) {
-          curSplit = getCookie("guess" + i).split(',').map(item => item === "" ? "," : item).filter((item, index, array) => item !== ',' || array[index - 1] !== ',');
+          curSplit = getStorage("guess" + i).split(',').map(item => item === "" ? "," : item).filter((item, index, array) => item !== ',' || array[index - 1] !== ',');
 
           console.log("Updating guess" + i + " to " + curSplit)
           showGuess(true);
@@ -286,18 +335,18 @@
       outputDiv.appendChild(lengthMessage);
     }
 
-    function showGuess(fromCookies = false){
+    function showGuess(fromStorage = false){
       displayColoredText(curSplit, splitOrganicString(trueMolecule), curGuessNum)
-      if(!fromCookies) {
-        setCookie("guess" + curGuessNum, curSplit)
+      if(!fromStorage) {
+        setStorage("guess" + curGuessNum, curSplit)
       }
       // Clear input box
       document.getElementById("guessInput").value = "";
 
       // Increment guess number
       curGuessNum++;
-      if(!fromCookies) {
-        setCookie("curGuessNum", curGuessNum)
+      if(!fromStorage) {
+        setStorage("curGuessNum", curGuessNum)
       }
 
       // Show corresponding hint
@@ -319,9 +368,8 @@
       lastDiv.parentNode.insertBefore(newDiv, lastDiv.nextSibling);
     }
 
-    // Modified from https://www.w3schools.com/js/js_cookies.asp
-    function setCookie(cname, cvalue, expire = true) {
-      if(expire === true) {
+    function setStorage (id, value, expire = true) {
+      /*if(expire === true) {
         const now = new Date();
 
         // Create a new Date object for the next 5 AM GMT
@@ -332,17 +380,22 @@
           next5AM = new Date(next5AM.getTime() + 24 * 60 * 60 * 1000);
         }
         let expires = "expires="+ next5AM.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/;SameSite=Strict";
+        document.cookie = id + "=" + value + ";" + expires + ";path=/;SameSite=Strict";
       }
       else {
-        document.cookie = cname + "=" + cvalue + ";path=/;SameSite=Strict";
-      }
+        document.cookie = id + "=" + value + ";path=/;SameSite=Strict";
+      }*/
 
+      if(expire) {
+        localStorage.setItem(id, value);
+      }
+      else {
+        localStorage.setItem(id, value);
+      }
     }
 
-    // Used from https://www.w3schools.com/js/js_cookies.asp
-    function getCookie(cname) {
-      let name = cname + "=";
+    function getStorage (id) {
+      /*let name = id + "=";
       let decodedCookie = decodeURIComponent(document.cookie);
       let ca = decodedCookie.split(';');
       for(let i = 0; i <ca.length; i++) {
@@ -351,11 +404,31 @@
           c = c.substring(1);
         }
         if (c.indexOf(name) === 0) {
-          console.log("Cookie: " + cname + ", value: " + c.substring(name.length, c.length))
+          console.log("Cookie: " + id + ", value: " + c.substring(name.length, c.length))
           return c.substring(name.length, c.length);
         }
       }
-      return "";
+      return "";*/
+      let out = localStorage.getItem(id);
+      if(!out) {
+        return "";
+      }
+
+      out = out.split("expires:")
+      if(out.length === 1) { // no expiry
+        return out[0];
+      }
+      else {
+        let d = new Date(Math.round(out[1]));
+        let now = Date.now();
+        if(now >= d) {
+          localStorage.removeItem(id);
+          return "";
+        }
+        else {
+          return out[0];
+        }
+      }
     }
   </script>
 
