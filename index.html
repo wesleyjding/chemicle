@@ -34,10 +34,27 @@
   <script type="text/JavaScript">
     // Organic Chemical Type (type, max)
     class oct {
-      constructor(type, max) {
+      constructor(type, max, date = null) {
         this._enabled = true;
         this._type = type;
         this._max = max;
+        this._date = date;
+        this._checkbox = null;
+      }
+
+      get enabled() {
+        return this._enabled;
+      }
+
+      set enabled(value) {
+        this._enabled = value;
+
+      }
+
+      disable() {
+        this._enabled = false;
+        this._checkbox.checked = false;
+        setStorage(this._type, false, false);
       }
 
       get type() {
@@ -48,14 +65,38 @@
         return this._max;
       }
 
-      get enabled() {
-        return this._enabled;
+      get date() {
+        return this._date;
       }
 
-      set enabled(value) {
-        this._enabled = value;
+      get checkbox() {
+        return this._checkbox;
       }
+
+      set checkbox(value) {
+        this._checkbox = value;
+      }
+
+      checkTimeBasedEnable () {
+        if(this._date === null) {
+          return false;
+        }
+        let now = Date.now();
+        let compareTo = new Date(this._date);
+        compareTo.setUTCHours(5);
+        return compareTo.getTime() <= now;
+      }
+
+
     }
+
+    const typeList = [new oct("alkane", 71, "2025-01-01"), new oct("alkene", 33, "2025-02-04"),
+      new oct("alkyne", 24, "2025-02-04"), new oct("alcohol", 12, "2025-02-10"),
+      new oct("ketone", 13, "2025-02-10"), new oct("carboxylicAcid", 29, "2025-02-12"),
+      new oct("aldehyde", 28, "2025-02-10"), new oct("ether", 12, "2025-02-13"),
+      new oct("ester", 18, "2025-02-12"), new oct("amine", 32, "2025-02-13"),
+      new oct("amide", 12, "2025-02-13"), new oct("nitrile", 4),
+      new oct("misc", 7)];
 
     let idNum;
 
@@ -71,6 +112,15 @@
     let curGuessNum = 1;
     let correctGuess = false;
 
+    let settingsButton;
+    let settingsCloseButton;
+    let settingsDiv;
+    let settingsFieldset;
+    let settingsLegendDiv;
+    let settingsBackgroundDiv;
+    let albrittonModeCheck;
+    let changedSettings = false;
+    let numBoxesChecked = 0;
     let formulaButton;
     let formulaDiv;
     let lineButton;
@@ -81,6 +131,7 @@
     let solutionDiv;
 
     document.addEventListener("DOMContentLoaded", async function () {
+      checkStorageSettings();
       generateId();
       while (!doneLoading) {
         await new Promise(r => setTimeout(r, 10))
@@ -89,15 +140,35 @@
       updateFromStorage();
     });
 
+    function checkStorageSettings() {
+      for (let i = 0; i < typeList.length; i++) {
+        let obj = typeList[i];
+        if(getStorage(obj.type) === "") {
+          for (let j = 0; j < typeList.length; j++) {
+            let obj2 = typeList[j];
+            if(obj2.checkTimeBasedEnable()) {
+              obj2.enabled = true;
+              setStorage(obj2.type, true, false);
+            }
+            else {
+              obj2.enabled = false;
+              setStorage(obj2.type, false, false);
+            }
+          }
+          setStorage("albrittonMode", true, false);
+          break;
+        }
+        else obj.enabled = getStorage(obj.type) === true;
+      }
+
+    }
+
     function generateId(moleculeNum = 1) {
-      const typeList = [new oct("alkane", 71), new oct("alkene", 33), new oct("alkyne", 33), new oct("alcohol", 12),
-        new oct("ketone", 13), new oct("carboxylicAcid", 29), new oct("aldehyde", 28), new oct("ether", 12),
-        new oct("ester", 18), new oct("amine", 32), new oct("amide", 12), new oct("nitrile", 4),
-        new oct("misc", 7)];
 
       let totalMax = 0;
+
       for (let i = 0; i < typeList.length; i++) {
-        if(typeList[i].enabled === true) {
+        if (typeList[i].enabled) {
           totalMax += typeList[i].max;
         }
       }
@@ -148,7 +219,7 @@
       }
 
       for (let i = 0; i < typeList.length; i++) {
-        if (typeList[i].enabled === true) {
+        if (typeList[i].enabled) {
           if (checkWithin(typeList[i].max, typeList[i].type)) {
             break;
           }
@@ -171,6 +242,14 @@
     }
 
     function reloadAssets() {
+      settingsButton = document.getElementById('settingsButton');
+      settingsCloseButton = document.getElementById('settingsCloseButton');
+      settingsDiv = document.getElementById('settings');
+      settingsFieldset = document.getElementById('settingsFieldset');
+      settingsBackgroundDiv = document.getElementById('settingsBackground');
+
+      albrittonModeCheck = document.getElementById('albrittonModeCheck');
+
       formulaButton = document.getElementById('formulaButton');
       formulaDiv = document.getElementById('formula');
 
@@ -184,6 +263,56 @@
 
       solutionButton = document.getElementById('solutionButton');
       solutionDiv = document.getElementById('solution');
+
+      function toggleVisibility(button, element, name, isImage = true) {
+        if(isImage) {
+          if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block'; // Show the image
+            if(button != null) {
+              button.innerHTML = "Hide " + name;
+            }
+          } else {
+            element.style.display = 'none'; // Hide the image
+            if(button != null) {
+              button.innerHTML = "Show " + name;
+            }
+          }
+        }
+        else {
+          if (element.hidden) {
+            element.hidden = false; // Show the image
+            if(button != null) {
+              button.innerHTML = "Hide " + name;
+            }
+          } else {
+            element.hidden = true; // Hide the image
+            if(button != null) {
+              button.innerHTML = "Show " + name;
+            }
+          }
+        }
+      }
+
+      settingsButton.addEventListener('click', () => {
+        toggleVisibility(null, settingsDiv, "Settings", false)
+        toggleVisibility(null, settingsBackgroundDiv, "SettingsBackground", false)
+      });
+
+      settingsCloseButton.addEventListener('click', () => {
+        toggleVisibility(null, settingsDiv, "Settings", false)
+        toggleVisibility(null, settingsBackgroundDiv, "SettingsBackground", false)
+        if(changedSettings) {
+          location.reload();
+        }
+      });
+
+      settingsBackgroundDiv.addEventListener('click', () => {
+        toggleVisibility(null, settingsDiv, "Settings", false)
+        toggleVisibility(null, settingsBackgroundDiv, "SettingsBackground", false)
+        if(changedSettings) {
+          location.reload();
+        }
+      });
 
       formulaButton.addEventListener('click', () => {
         toggleVisibility(formulaButton, formulaDiv, "Chemical Formula", false)
@@ -201,44 +330,111 @@
         toggleVisibility(solutionButton, solutionDiv, "Solution", false)
       });
 
-      function toggleVisibility(button, element, name, isImage = true) {
-        if(isImage) {
-          if (element.style.display === 'none' || element.style.display === '') {
-            element.style.display = 'block'; // Show the image
-            button.innerHTML = "Hide " + name;
-          } else {
-            element.style.display = 'none'; // Hide the image
-            button.innerHTML = "Show " + name;
+      albrittonModeCheck.addEventListener('change', () => {
+        settingsFieldset.disabled = albrittonModeCheck.checked;
+        if(albrittonModeCheck.checked) {
+          numBoxesChecked = 0;
+          for (let i = 0; i < typeList.length; i++) {
+            let obj = typeList[i];
+            if(obj.checkTimeBasedEnable()) {
+              obj.enabled = true;
+              obj.checkbox.checked = true;
+              setStorage(obj.type, true, false)
+              numBoxesChecked++;
+            } else {
+              obj.enabled = false;
+              obj.checkbox.checked = false;
+              setStorage(obj.type, false, false)
+            }
           }
+          setStorage("albrittonMode", true, false);
         }
         else {
-          if (element.hidden === true) {
-            element.hidden = false; // Show the image
-            button.innerHTML = "Hide " + name;
-          } else {
-            element.hidden = true; // Hide the image
-            button.innerHTML = "Show " + name;
+          setStorage("albrittonMode", false, false);
+        }
+        changedSettings = true;
+        setStorage("changedSettings", true, false);
+      });
+
+      if(getStorage("albrittonMode")) {
+        albrittonModeCheck.checked = true;
+        settingsFieldset.disabled = true;
+      }
+
+      for (let i = 0; i < typeList.length; i++) {
+        let obj = typeList[i];
+
+        settingsLegendDiv = document.getElementById('settingsLegend');
+
+        const newDiv = document.createElement("div");
+        const newInput = document.createElement("input");
+        newInput.type = "checkbox";
+        newInput.id = obj.type + "Check";
+        newInput.name = obj.type + "Check";
+        newInput.value = obj.type;
+        const newLabel = document.createElement("label");
+        newLabel.htmlFor = obj.type + "Check";
+        newLabel.innerHTML = obj.type.replace(/([A-Z])/g, ' $1') // Add space before each capital letter
+                .replace(/^./, match => match.toUpperCase()) // Capitalize the first character
+                .trim(); // Remove leading or trailing spaces, if any;
+        newDiv.insertBefore(newLabel, null);
+        newDiv.insertBefore(newInput, newLabel);
+        settingsLegendDiv.parentNode.insertBefore(newDiv, null);
+        obj.checkbox = newInput;
+        newInput.addEventListener('change', () => {
+          if(newInput.checked) {
+            obj.enabled = true;
+            setStorage(obj.type, true, false);
+            numBoxesChecked++;
+            changedSettings = true;
+            setStorage("changedSettings", true, false);
           }
+          else {
+            if(numBoxesChecked > 1) {
+              obj.enabled = false;
+              setStorage(obj.type, false, false);
+              numBoxesChecked--;
+              changedSettings = true;
+              setStorage("changedSettings", true, false);
+            }
+            else {
+              newInput.checked = true;
+            }
+          }
+        });
+        if(obj.enabled) {
+          newInput.checked = true;
+          numBoxesChecked++;
         }
       }
     }
 
     function updateFromStorage() {
-      if (getStorage("curGuessNum") !== "" && getStorage("curGuessNum") > 1) {
+      if(getStorage("changedSettings") === true) {
+        setStorage("changedSettings", false, false);
+        let i = 1;
+        while(getStorage("guess" + i) !== "") {
+          removeStorage("guess" + i);
+          i++;
+        }
+        removeStorage("curGuessNum")
+      }
+      else if (getStorage("curGuessNum") !== "" && getStorage("curGuessNum") > 1) {
         let guessNum = getStorage("curGuessNum");
         for (let i = 1; i < guessNum; i++) {
           curSplit = getStorage("guess" + i).split(',').map(item => item === "" ? "," : item).filter((item, index, array) => item !== ',' || array[index - 1] !== ',');
 
-          console.log("Updating guess" + i + " to " + curSplit)
+          //console.log("Updating guess" + i + " to " + curSplit)
           showGuess(true);
         }
       }
+
     }
 
     function handleSubmit() {
       const inputText = document.getElementById("guessInput").value;
       const output = splitOrganicString(inputText);
-      if (output === false) {
+      if (!output) {
         document.getElementById("validWarning").hidden = false;
         return false;
       } else {
@@ -257,11 +453,11 @@
         "di", "tri", "tetra",                                                     // Multipliers for side chains
         "iso", "cyclo", "poly", "benz", "form", "acet",                           // Miscellaneous prefixes
         "fluoro", "chloro", "bromo", "iodo",                                      // Halides
-        "oxy", "hydroxy", "amine", "oxo", "anol", "anal", "anone", "anoic",       // Functional groups
+        "oxy", "hydroxy", "amine", "oxo",                                         // Functional groups
         "acid", "oate", "anoate", "ether",  "nitrile",                            // More functional groups
         "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", "-", "(", ")",     // Positions (1-9)
         "meth", "eth", "prop", "but", "pent", "hex", "hept", "oct", "non", "dec", // Standard prefixes for chain lengths
-        "an", "ol", "one", "ic", "ate", "a", "en", "yn", "o",                     // Misc suffixes for compact spelling
+        "an", "ol", "one", "al", "oic", "ic", "ate", "a", "en", "yn", "o",        // Misc suffixes for compact spelling
         "tert", "sec",                                                            // Butyl prefixes
       ];
 
@@ -437,6 +633,10 @@
       }
     }
 
+    function removeStorage (id) {
+      localStorage.removeItem(id);
+    }
+
     function getStorage (id) {
       let out = localStorage.getItem(id);
       if(!out) {
@@ -445,6 +645,9 @@
 
       out = out.split("expires=")
       if(out.length === 1) { // no expiry
+        //console.log(id + ": " + out[0] + " (no expiry)");
+        if(out[0] === "true") return true;
+        else if (out[0] === "false") return false;
         return out[0];
       }
       else {
@@ -455,6 +658,9 @@
           return "";
         }
         else {
+          //console.log(id + ": " + out[0]);
+          if(out[0] === "true") return true;
+          else if (out[0] === "false") return false;
           return out[0];
         }
       }
@@ -464,6 +670,41 @@
   <body>
     <h1 style="text-align: center;
       padding: 0.1%; position: static; font-size: xx-large; "><b>chemicle</b></h1>
+
+    <button id="settingsButton">Settings</button>
+
+    <div id="settings" style="position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  z-index: 101; /* Higher than overlay */
+  padding: 20px;" hidden="hidden">
+      <div class="settingsContent">
+        <h2>Settings</h2>
+        <input type="checkbox" id="albrittonModeCheck" name="albrittonModeCheck" value = "albrittonMode">
+        <label for="albrittonModeCheck">Albritton Mode</label>
+
+        <fieldset id="settingsFieldset">
+          <legend id="settingsLegend">Type Selection</legend>
+        </fieldset>
+
+        <div style="padding: 0.5%"></div>
+        <button id="settingsCloseButton">Save and Close</button>
+      </div>
+    </div>
+
+    <div id="settingsBackground" style="position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;" hidden="hidden"></div>
+
     <div id="guess1" style="text-align: center;"></div>
     <form onsubmit="return handleSubmit();"  style="text-align: center; padding: 1%">
       <label for="guessInput"></label>
