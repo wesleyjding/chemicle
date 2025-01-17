@@ -119,6 +119,8 @@
     let settingsLegendDiv;
     let settingsBackgroundDiv;
     let albrittonModeCheck;
+    let gradualHintsCheck;
+    let gradualHints;
     let changedSettings = false;
     let numBoxesChecked = 0;
     let formulaButton;
@@ -159,6 +161,11 @@
           break;
         }
         else obj.enabled = getStorage(obj.type) === true;
+      }
+      if(getStorage("gradualHints") === "") {
+        gradualHints = true;
+      } else {
+        gradualHints = !!getStorage("gradualHints");
       }
 
     }
@@ -249,6 +256,7 @@
       settingsBackgroundDiv = document.getElementById('settingsBackground');
 
       albrittonModeCheck = document.getElementById('albrittonModeCheck');
+      gradualHintsCheck = document.getElementById('gradualHintsCheck');
 
       formulaButton = document.getElementById('formulaButton');
       formulaDiv = document.getElementById('formula');
@@ -361,6 +369,15 @@
         settingsFieldset.disabled = true;
       }
 
+      gradualHintsCheck.addEventListener('change', () => {
+        gradualHints = gradualHintsCheck.checked;
+        setStorage("gradualHints", gradualHints, false);
+        changedSettings = true;
+        setStorage("changedSettings", true, false);
+      });
+
+      gradualHintsCheck.checked = gradualHints;
+
       for (let i = 0; i < typeList.length; i++) {
         let obj = typeList[i];
 
@@ -427,6 +444,15 @@
           //console.log("Updating guess" + i + " to " + curSplit)
           showGuess(true);
         }
+      }
+      if(getStorage("gradualHints") === false) {
+        console.log("Showing Hints!")
+        showHint(1);
+        formulaButton.click();
+        showHint(2);
+        lineButton.click();
+        showHint(3);
+        lewisButton.click();
       }
 
     }
@@ -582,6 +608,10 @@
         span.className = 'green';
         span.innerHTML = "<b>Correct!</b>";
         newDiv.appendChild(span);
+        showHint(1);
+        showHint(2);
+        showHint(3);
+        showHint(4);
       }
       // Increment guess number
       if(curGuessNum <= 8) {
@@ -598,19 +628,35 @@
         setStorage("curGuessNum", curGuessNum)
       }
       // Show corresponding hint
-      if(curGuessNum === 2) {
-        formulaButton.style.display = 'block';
-        formulaDiv.innerHTML = "Formula = " + trueMoleculeFormula;
+      if (curGuessNum === 2) {
+        showHint(1);
+      } else if (curGuessNum === 4) {
+        showHint(2);
+      } else if (curGuessNum === 6) {
+        showHint(3);
+      } else if (curGuessNum >= 8) {
+        showHint(4);
       }
-      else if(curGuessNum === 3) {
-        lineButton.style.display = 'block';
-      }
-      else if(curGuessNum === 4) {
-        lewisButton.style.display = 'block';
-      }
-      else if(curGuessNum >= 6) {
-        solutionButton.style.display = 'block';
-        solutionDiv.innerHTML = "Solution = " + trueMoleculeName;
+    }
+
+    function showHint(hintNum) {
+      switch (hintNum) {
+        case 1:
+          formulaButton.style.display = 'block';
+          formulaDiv.innerHTML = "Formula = " + trueMoleculeFormula;
+          break;
+        case 2:
+          lineButton.style.display = 'block';
+          break;
+        case 3:
+          lewisButton.style.display = 'block';
+          break;
+        case 4:
+          solutionButton.style.display = 'block';
+          solutionDiv.innerHTML = "Solution = " + trueMoleculeName;
+          break;
+        default:
+          console.log("No hint for hintNum " + hintNum)
       }
     }
 
@@ -671,6 +717,7 @@
     <h1 style="text-align: center;
       padding: 0.1%; position: static; font-size: xx-large; "><b>chemicle</b>
       <button id="settingsButton" style="position: static" class="center">Settings</button>
+
     </h1>
 
     <div id="settings" style="position: fixed;
@@ -685,8 +732,10 @@
   padding: 20px;" hidden="hidden">
       <div class="settingsContent">
         <h2>Settings</h2>
-        <input type="checkbox" id="albrittonModeCheck" name="albrittonModeCheck" value = "albrittonMode">
-        <label for="albrittonModeCheck">Albritton Mode</label>
+        <input type="checkbox" id="albrittonModeCheck" name="albrittonModeCheck" value = "albrittonMode" title="Automatically enables each type of molecule over time">
+        <label for="albrittonModeCheck" title="Automatically enables each type of molecule over time">Albritton Mode   </label>
+        <input type="checkbox" id="gradualHintsCheck" name="gradualHintsCheck" value = "gradualHints" style="position:relative">
+        <label for="gradualHintsCheck">Gradual Hints</label>
 
         <fieldset id="settingsFieldset">
           <legend id="settingsLegend">Type Selection</legend>
