@@ -112,12 +112,17 @@
     let curGuessNum = 1;
     let correctGuess = false;
 
+    let moleculeNum = 1;
+
     let settingsButton;
     let settingsCloseButton;
     let settingsDiv;
     let settingsFieldset;
     let settingsLegendDiv;
     let settingsBackgroundDiv;
+
+    let generateNewMoleculeButton;
+
     let albrittonModeCheck;
     let gradualHintsCheck;
     let gradualHints;
@@ -134,7 +139,7 @@
 
     document.addEventListener("DOMContentLoaded", async function () {
       checkStorageSettings();
-      generateId();
+      generateId(moleculeNum);
       while (!doneLoading) {
         await new Promise(r => setTimeout(r, 10))
       }
@@ -163,9 +168,14 @@
         else obj.enabled = getStorage(obj.type) === true;
       }
       if(getStorage("gradualHints") === "") {
-        gradualHints = true;
+        gradualHints = false;
       } else {
         gradualHints = !!getStorage("gradualHints");
+      }
+      if(getStorage("moleculeNum") === "") {
+        moleculeNum = 1;
+      } else {
+        moleculeNum = parseInt(getStorage("moleculeNum"))
       }
 
     }
@@ -197,19 +207,22 @@
           // Convert milliseconds to days (1 day = 24 * 60 * 60 * 1000 ms)
           let diffInDays = Math.floor(diffInMs / (24 * 60 * 60 * 1000));
 
-          // Deterministic random algorithm
-          function random(seed) {
-            let t = (seed ^ 0xEFC5DAF8) + (seed << 3);
-            t = (t ^ (t >>> 16)) * 0x42EDBF1C;
-            t = (t ^ (t >>> 13)) * 0xD9AAB462;
-            t = t ^ (t >>> 16);
-            return t;
-          }
-
           return Math.abs(random(diffInDays));
         }
+        // Deterministic random algorithm
+        function random(seed) {
+          let t = (seed ^ 0xEFC5DAF8) + (seed << 3);
+          t = (t ^ (t >>> 16)) * 0x42EDBF1C;
+          t = (t ^ (t >>> 13)) * 0xD9AAB462;
+          t = t ^ (t >>> 16);
+          return t;
+        }
         let d = dailyRandom();
-        let add = (moleculeN - 1) * Math.floor(Math.pow(d, 0.5));
+        let add = 0;
+        if(moleculeNum > 1) {
+          add = (random(moleculeN) * d) % 100000
+        }
+        //console.log("Add:" + add)
         return (d + add) % maxValue + 1;
       }
 
@@ -233,6 +246,7 @@
         }
       }
       moleculeId = moleculeType + "-" + (idNum).toString().padStart(3, "0");
+      console.log("Molecule #" + moleculeNum)
       console.log(moleculeId);
 
       fetch("assets/" + moleculeId + "/name.txt")
@@ -254,6 +268,8 @@
       settingsDiv = document.getElementById('settings');
       settingsFieldset = document.getElementById('settingsFieldset');
       settingsBackgroundDiv = document.getElementById('settingsBackground');
+
+      generateNewMoleculeButton = document.getElementById('generateNewButton');
 
       albrittonModeCheck = document.getElementById('albrittonModeCheck');
       gradualHintsCheck = document.getElementById('gradualHintsCheck');
@@ -320,6 +336,14 @@
         if(changedSettings) {
           location.reload();
         }
+      });
+
+      generateNewMoleculeButton.addEventListener('click', () => {
+        moleculeNum++;
+        setStorage("moleculeNum", moleculeNum);
+        changedSettings = true;
+        setStorage("changedSettings", true, false);
+        location.reload();
       });
 
       formulaButton.addEventListener('click', () => {
@@ -714,12 +738,12 @@
   </script>
 
   <body>
-    <h1 style="text-align: center;
-      padding: 0.1%; position: static; font-size: xx-large; "><b>chemicle</b>
-      <button id="settingsButton" style="position: static" class="center">Settings</button>
 
-    </h1>
-
+    <div style="padding: 0.1%; font-size: xx-large;text-align: center;align-self:center;"><b>chemicle</b></div>
+    <div style="text-align:center; padding-bottom:5vh" >
+      <button id="settingsButton" style="">Settings</button>
+      <button id="generateNewButton" style="">Generate New Molecule</button>
+    </div>
     <div id="settings" style="position: fixed;
   top: 50%;
   left: 50%;
