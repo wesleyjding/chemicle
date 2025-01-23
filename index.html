@@ -123,6 +123,12 @@
 
     let generateNewMoleculeButton;
 
+    let tutorialButton;
+    let tutorialCloseButton;
+    let tutorialDiv;
+    let tutorialFieldset;
+    let tutorialBackgroundDiv;
+
     let albrittonModeCheck;
     let gradualHintsCheck;
     let gradualHints;
@@ -148,6 +154,12 @@
     });
 
     function checkStorageSettings() {
+      if(getStorage("moleculeNum") === "") {
+        moleculeNum = 1;
+      } else {
+        moleculeNum = parseInt(getStorage("moleculeNum"))
+      }
+
       for (let i = 0; i < typeList.length; i++) {
         let obj = typeList[i];
         if(getStorage(obj.type) === "") {
@@ -169,19 +181,17 @@
       }
       if(getStorage("gradualHints") === "") {
         gradualHints = false;
+        setStorage("gradualHints", false, false)
       } else {
         gradualHints = !!getStorage("gradualHints");
       }
-      if(getStorage("moleculeNum") === "") {
-        moleculeNum = 1;
-      } else {
-        moleculeNum = parseInt(getStorage("moleculeNum"))
-      }
+
+
 
     }
 
     function generateId(moleculeNum = 1) {
-
+      document.getElementById("guessInput").value = "";
       let totalMax = 0;
 
       for (let i = 0; i < typeList.length; i++) {
@@ -269,6 +279,12 @@
       settingsFieldset = document.getElementById('settingsFieldset');
       settingsBackgroundDiv = document.getElementById('settingsBackground');
 
+      tutorialButton = document.getElementById('tutorialButton');
+      tutorialCloseButton = document.getElementById('tutorialCloseButton');
+      tutorialDiv = document.getElementById('tutorial');
+      tutorialFieldset = document.getElementById('tutorialFieldset');
+      tutorialBackgroundDiv = document.getElementById('tutorialBackground');
+
       generateNewMoleculeButton = document.getElementById('generateNewButton');
 
       albrittonModeCheck = document.getElementById('albrittonModeCheck');
@@ -338,6 +354,24 @@
         }
       });
 
+      tutorialButton.addEventListener('click', () => {
+        toggleVisibility(null, tutorialDiv, "Tutorial", false)
+        toggleVisibility(null, tutorialBackgroundDiv, "TutorialBackground", false)
+        setStorage("seenTutorial", true, false);
+      });
+
+      tutorialCloseButton.addEventListener('click', () => {
+        toggleVisibility(null, tutorialDiv, "Tutorial", false)
+        toggleVisibility(null, tutorialBackgroundDiv, "TutorialBackground", false)
+        setStorage("seenTutorial", true, false);
+      });
+
+      tutorialBackgroundDiv.addEventListener('click', () => {
+        toggleVisibility(null, tutorialDiv, "Tutorial", false)
+        toggleVisibility(null, tutorialBackgroundDiv, "TutorialBackground", false)
+        setStorage("seenTutorial", true, false);
+      });
+
       generateNewMoleculeButton.addEventListener('click', () => {
         moleculeNum++;
         setStorage("moleculeNum", moleculeNum);
@@ -348,14 +382,19 @@
 
       formulaButton.addEventListener('click', () => {
         toggleVisibility(formulaButton, formulaDiv, "Chemical Formula", false)
+        setStorage("formulaDivHidden", formulaDiv.hidden, false);
       });
 
       lineButton.addEventListener('click', () => {
         toggleVisibility(lineButton, lineImage, "Line Structure")
+        let shown = lineImage.style.display === "block";
+        setStorage("lineImageHidden", !shown, false);
       });
 
       lewisButton.addEventListener('click', () => {
         toggleVisibility(lewisButton, lewisImage, "Lewis Structure")
+        let shown = lewisImage.style.display === "block";
+        setStorage("lewisImageHidden", !shown, false);
       });
 
       solutionButton.addEventListener('click', () => {
@@ -470,13 +509,12 @@
         }
       }
       if(getStorage("gradualHints") === false) {
-        console.log("Showing Hints!")
         showHint(1);
-        formulaButton.click();
         showHint(2);
-        lineButton.click();
         showHint(3);
-        lewisButton.click();
+      }
+      if(getStorage("seenTutorial") === "") {
+        tutorialButton.click();
       }
 
     }
@@ -668,12 +706,24 @@
         case 1:
           formulaButton.style.display = 'block';
           formulaDiv.innerHTML = "Formula = " + trueMoleculeFormula;
+          if(((getStorage("formulaDivHidden") === true && formulaDiv.hidden === false)
+                  || (getStorage("formulaDivHidden") === false && formulaDiv.hidden === true))) {
+            formulaButton.click();
+          }
           break;
         case 2:
           lineButton.style.display = 'block';
+          if(((getStorage("lineImageHidden") === true && lineImage.style.display === "block")
+                  || (getStorage("lineImageHidden") === false && lineImage.style.display !== "block"))) {
+            lineButton.click();
+          }
           break;
         case 3:
           lewisButton.style.display = 'block';
+          if(((getStorage("lewisImageHidden") === true && lewisImage.style.display === "block")
+                  || (getStorage("lewisImageHidden") === false && lewisImage.style.display !== "block"))) {
+            lewisButton.click();
+          }
           break;
         case 4:
           solutionButton.style.display = 'block';
@@ -738,10 +788,16 @@
   </script>
 
   <body>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0&icon_names=help,settings" />
+    <div style="text-align:center; padding:1vh" >
+      <button id="settingsButton" style="background:transparent;border:0px;display:inline">
+        <span class="material-symbols-outlined">settings</span></button>
+      <div style="padding: 0.1%; font-size: xx-large;text-align: center;align-self:center;display:inline"><b>chemicle</b></div>
+      <button id="tutorialButton" style="background:transparent;border:0px;display:inline">
+        <span class="material-symbols-outlined">help</span></button>
+    </div>
 
-    <div style="padding: 0.1%; font-size: xx-large;text-align: center;align-self:center;"><b>chemicle</b></div>
     <div style="text-align:center; padding-bottom:5vh" >
-      <button id="settingsButton" style="">Settings</button>
       <button id="generateNewButton" style="">Generate New Molecule</button>
     </div>
     <div id="settings" style="position: fixed;
@@ -749,11 +805,14 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 300px;
+  max-width: 80vw;
+  max-height: 80vh;
   background: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   z-index: 101; /* Higher than overlay */
-  padding: 20px;" hidden="hidden">
+  padding: 20px;
+overflow:scroll" hidden="hidden">
       <div class="settingsContent">
         <h2>Settings</h2>
         <input type="checkbox" id="albrittonModeCheck" name="albrittonModeCheck" value = "albrittonMode" title="Automatically enables each type of molecule over time">
@@ -769,7 +828,6 @@
         <button id="settingsCloseButton">Close</button>
       </div>
     </div>
-
     <div id="settingsBackground" style="position: fixed;
   top: 0;
   left: 0;
@@ -778,8 +836,70 @@
   background: rgba(0, 0, 0, 0.5);
   z-index: 100;" hidden="hidden"></div>
 
+    <div id="tutorial" style="position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  max-width: 80vw;
+  max-height:80vh;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  z-index: 101; /* Higher than overlay */
+  padding: 20px;
+  overflow:scroll" hidden="hidden">
+      <div class="tutorialContent" >
+        <h2>Tutorial</h2>
+        <p>This is <b>chemicle</b>, a wordle style game for organic chemistry molecules!</p>
+        <h3>How to play</h3>
+        <p>The website automatically selects a molecule, and your job is to guess its name.</p>
+        <p>
+          Enter a guess in the box. It will be split into segments (separated by spaces), and each
+          segment is colored according to wordle rules.
+          <b class="green">Green</b> if it is in the correct spot,
+          <b class="yellow">yellow</b> if it appears in the molecule name but in another spot, and
+          <b class="red">red</b> if it doesn't appear at all.
+        </p>
+        <p>
+          Additionally, a message of <b>too short</b>, <b>too long</b>, or <b>correct length</b> will
+          tell you if your guess needs more or less <u>segments</u>. It does <b>not</b> refer to the
+          actual length of the word, nor the chain length of the molecule.
+        </p>
+        <img id="example1" src="assets/example1.png" alt="Example Guess" class="center" style="width:20%;">
+        <p>
+          In the example above, there should be a "<b>di</b>" prefix before the "<b class="yellow">methylpentane</b>",
+          so it is colored yellow, since it should all be shifted over. Below, it says <b>too short</b>, meaning
+          you need to add some segments.
+        </p>
+        <h3>Customization</h3>
+        <p>
+          You can click on the settings button to modify how you want to practice. <b>Albritton Mode</b> is on by default,
+          meaning molecule types will enable as they are taught in Mr. Albritton's class. You can also disable it and
+          choose which ones you want to practice. If you want to be given information gradually as you do guesses, turn
+          on the <b>Gradual Hints</b> option. The hints will be given on the 1st, 3rd, and 5th guesses. The solution will
+          always be given on the 7th guess.
+        </p>
+        <img id="example2" src="assets/example2.png" alt="Settings Picture" class="center" style="width:20%;">
+        <p>
+          Click on the <b>Generate New Molecule</b> button to create a new molecule. You can keep generating new
+          molecules as long as you want. The randomness is always seeded based on the day. That means that the 1st,
+          2nd, 3rd, etc., molecules of the day will be the same for everyone.
+        </p>
+
+        <button id="tutorialCloseButton">Close</button>
+      </div>
+    </div>
+    <div id="tutorialBackground" style="position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 100;" hidden="hidden"></div>
+
     <div id="guess1" style="text-align: center;"></div>
-    <form onsubmit="return handleSubmit();"  style="text-align: center; padding: 1%">
+    <form onsubmit="return handleSubmit();"  style="text-align: center; padding: 1%" autocomplete="off" autocapitalize="off" spellcheck="false">
       <label for="guessInput"></label>
       <input type="text"
              id="guessInput"
