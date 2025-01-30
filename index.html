@@ -96,36 +96,16 @@
 
     let correctGuesses;
     let totalGuesses;
+    let correctGuessesBlind;
+    let totalGuessesBlind;
     let currentStreak;
     let maxStreak;
     let lastStreakDate;
-    let individualGuessStats = [];
+    let individualGuessStatsTotal = [];
     let individualGuessStatsBlind = [];
 
-    let settingsButton;
-    let settingsCloseButton;
-    let settingsDiv;
-    let settingsFieldset;
-    let settingsLegendDiv;
-    let settingsBackgroundDiv;
-    let clearStorageButton;
-
-    let generateNewMoleculeButton;
-
-    let statisticsButton;
-    let statisticsCloseButton;
-    let statisticsDiv;
-    let statisticsBackgroundDiv;
-
     let tutorialButton;
-    let tutorialCloseButton;
-    let tutorialDiv;
-    let tutorialBackgroundDiv;
 
-    let moleculeIdDiv;
-
-    let albrittonModeCheck;
-    let gradualHintsCheck;
     let gradualHints;
     let changedSettings = false;
     let numBoxesChecked = 0;
@@ -278,29 +258,29 @@
     }
 
     function reloadAssets() {
-      settingsButton = document.getElementById('settingsButton');
-      settingsCloseButton = document.getElementById('settingsCloseButton');
-      settingsDiv = document.getElementById('settings');
-      settingsFieldset = document.getElementById('settingsFieldset');
-      settingsBackgroundDiv = document.getElementById('settingsBackground');
-      clearStorageButton = document.getElementById('clearStorageButton');
+      let settingsButton = document.getElementById('settingsButton');
+      let settingsCloseButton = document.getElementById('settingsCloseButton');
+      let settingsDiv = document.getElementById('settings');
+      let settingsFieldset = document.getElementById('settingsFieldset');
+      let settingsBackgroundDiv = document.getElementById('settingsBackground');
+      let clearStorageButton = document.getElementById('clearStorageButton');
 
       tutorialButton = document.getElementById('tutorialButton');
-      tutorialCloseButton = document.getElementById('tutorialCloseButton');
-      tutorialDiv = document.getElementById('tutorial');
-      tutorialBackgroundDiv = document.getElementById('tutorialBackground');
+      let tutorialCloseButton = document.getElementById('tutorialCloseButton');
+      let tutorialDiv = document.getElementById('tutorial');
+      let tutorialBackgroundDiv = document.getElementById('tutorialBackground');
 
-      generateNewMoleculeButton = document.getElementById('generateNewButton');
+      let generateNewMoleculeButton = document.getElementById('generateNewButton');
 
-      statisticsButton = document.getElementById('statisticsButton');
-      statisticsCloseButton = document.getElementById('statisticsCloseButton');
-      statisticsDiv = document.getElementById('statistics');
-      statisticsBackgroundDiv = document.getElementById('statisticsBackground');
+      let statisticsButton = document.getElementById('statisticsButton');
+      let statisticsCloseButton = document.getElementById('statisticsCloseButton');
+      let statisticsDiv = document.getElementById('statistics');
+      let statisticsBackgroundDiv = document.getElementById('statisticsBackground');
 
-      moleculeIdDiv = document.getElementById('moleculeIdDiv');
+      let moleculeIdDiv = document.getElementById('moleculeIdDiv');
 
-      albrittonModeCheck = document.getElementById('albrittonModeCheck');
-      gradualHintsCheck = document.getElementById('gradualHintsCheck');
+      let albrittonModeCheck = document.getElementById('albrittonModeCheck');
+      let gradualHintsCheck = document.getElementById('gradualHintsCheck');
 
       formulaButton = document.getElementById('formulaButton');
       formulaDiv = document.getElementById('formula');
@@ -418,14 +398,31 @@
           percent = percent.toString().match(re)[0];
         }
 
-        let statistics4 = document.getElementById("statistics4"); // Current Day Streak
-        let statistics5 = document.getElementById("statistics5"); // Max Streak
+        let statistics4 = document.getElementById("statistics4"); // Correct Guesses
+        let statistics5 = document.getElementById("statistics5"); // Average Guesses
+        let statistics6 = document.getElementById("statistics6"); // Accuracy
+        let percent2 = 0;
+        if(totalGuessesBlind !== 0) {
+          percent2 = 100 * correctGuessesBlind/totalGuessesBlind;
+          // https://stackoverflow.com/questions/4187146/truncate-number-to-two-decimal-places-without-rounding
+          let re = new RegExp('^-?\\d+(?:\.\\d{0,' + (2 || -1) + '})?');
+          percent2 = percent2.toString().match(re)[0];
+        }
+
+
+        let statistics7 = document.getElementById("statistics7"); // Current Day Streak
+        let statistics8 = document.getElementById("statistics8"); // Max Streak
 
         statistics1.innerHTML = "Correct Guesses: <b>" + correctGuesses + "</b>";
         statistics2.innerHTML = "Total Guesses: <b>" + totalGuesses + "</b>";
         statistics3.innerHTML = "Accuracy: <b>" + percent + "%</b>";
-        statistics4.innerHTML = "Current Day Streak: <b>" + currentStreak + "</b>";
-        statistics5.innerHTML = "Max Day Streak: <b>" + maxStreak + "</b>"
+
+        statistics4.innerHTML = "Correct Guesses: <b>" + correctGuessesBlind + "</b>";
+        statistics5.innerHTML = "Total Guesses: <b>" + totalGuessesBlind + "</b>";
+        statistics6.innerHTML = "Accuracy: <b>" + percent2 + "%</b>";
+
+        statistics7.innerHTML = "Current Day Streak: <b>" + currentStreak + "</b>";
+        statistics8.innerHTML = "Max Day Streak: <b>" + maxStreak + "</b>"
 
         let statsRegular = [
           document.getElementById("stats1"),
@@ -447,30 +444,25 @@
           document.getElementById("stats7b"),
           document.getElementById("stats8b")];
 
-        console.log("Individual Guess Stats: " + individualGuessStats)
-        for (let i = 0; i < 8; i++) {
-          console.log("#" + i + ": " + individualGuessStats[i])
-        }
-        console.log("Individual Guess Stats Blind: " + individualGuessStatsBlind)
         let max = 1;
         for (let i = 0; i < 8; i++) {
-          if(individualGuessStats[i] > max) {
-            max = individualGuessStats[i];
+          if(individualGuessStatsTotal[i] > max) {
+            max = individualGuessStatsTotal[i];
           }
         }
-        console.log("Max is: " + max)
+        //console.log("Max is: " + max)
         let totalPixels = 200;
         for (let i = 0; i < 8; i++) {
-          let total = individualGuessStats[i];
+          let total = individualGuessStatsTotal[i];
           let blind = individualGuessStatsBlind[i];
           let regular = total - blind;
           statsRegular[i].style.width = regular / max * totalPixels + "px";
-          console.log("Width is: " + regular / max * totalPixels + "px")
+          //console.log("Width is: " + regular / max * totalPixels + "px")
           statsRegular[i].style.minWidth = "20";
           statsRegular[i].innerHTML = regular.toString();
 
           statsBlind[i].style.width = blind / max * totalPixels + "px";
-          console.log("Width is: " + blind / max * totalPixels + "px")
+          //console.log("Width is: " + blind / max * totalPixels + "px")
           statsBlind[i].style.minWidth = "20";
           statsBlind[i].innerHTML = blind.toString();
         }
@@ -547,11 +539,9 @@
       });
 
       gradualHintsCheck.checked = gradualHints;
-
+      let settingsLegendDiv = document.getElementById('settingsLegend');
       for (let i = 0; i < typeList.length; i++) {
         let obj = typeList[i];
-
-        settingsLegendDiv = document.getElementById('settingsLegend');
 
         const newDiv = document.createElement("div");
         const newInput = document.createElement("input");
@@ -642,6 +632,22 @@
         totalGuesses = parseInt(getStorage("totalGuesses"));
       }
 
+      if(getStorage("correctGuessesBlind") === "") {
+        correctGuessesBlind = 0;
+        setStorage("correctGuessesBlind", correctGuessesBlind, false);
+      }
+      else {
+        correctGuessesBlind = parseInt(getStorage("correctGuessesBlind"));
+      }
+
+      if(getStorage("totalGuessesBlind") === "") {
+        totalGuessesBlind = 0;
+        setStorage("totalGuessesBlind", totalGuessesBlind, false);
+      }
+      else {
+        totalGuessesBlind = parseInt(getStorage("totalGuessesBlind"));
+      }
+
       if(getStorage("lastStreakDate") === "") {
         lastStreakDate = new Date(2000, 0, 1);
         setStorage("lastStreakDate", lastStreakDate.getTime(), false);
@@ -685,11 +691,11 @@
       }
 
       if(getStorage("individualGuessStats") === "") {
-        individualGuessStats = [0, 0, 0, 0, 0, 0, 0, 0];
-        localStorage.setItem("individualGuessStats", individualGuessStats);
+        individualGuessStatsTotal = [0, 0, 0, 0, 0, 0, 0, 0];
+        localStorage.setItem("individualGuessStats", individualGuessStatsTotal);
       }
       else {
-        individualGuessStats = localStorage.getItem("individualGuessStats").split(",");
+        individualGuessStatsTotal = localStorage.getItem("individualGuessStats").split(",");
       }
 
       if(getStorage("individualGuessStatsBlind") === "") {
@@ -835,8 +841,13 @@
       displayColoredText(curSplit, splitOrganicString(trueMoleculeName), curGuessNum)
       if(!fromStorage) {
         setStorage("guess" + curGuessNum, curSplit)
-        totalGuesses++;
-        setStorage("totalGuesses", totalGuesses, false);
+        if(gradualHints === true) {
+          totalGuessesBlind++;
+          setStorage("totalGuessesBlind", totalGuessesBlind, false);
+        } else {
+          totalGuesses++;
+          setStorage("totalGuesses", totalGuesses, false);
+        }
       }
       // Clear input box
       document.getElementById("guessInput").value = "";
@@ -864,11 +875,14 @@
           if(gradualHints === true) {
             individualGuessStatsBlind[curGuessNum-1]++;
             localStorage.setItem("individualGuessStatsBlind", individualGuessStatsBlind);
+            correctGuessesBlind++;
+            setStorage("correctGuessesBlind", correctGuessesBlind, false);
+          } else {
+            correctGuesses++;
+            setStorage("correctGuesses", correctGuesses, false);
           }
-          individualGuessStats[curGuessNum-1]++;
-          localStorage.setItem("individualGuessStats", individualGuessStats);
-          correctGuesses++;
-          setStorage("correctGuesses", correctGuesses, false);
+          individualGuessStatsTotal[curGuessNum-1]++;
+          localStorage.setItem("individualGuessStats", individualGuessStatsTotal);
 
           function daysDifference(date1, date2) {
             // Generated by ChatGPT, prompt written by self
@@ -1156,11 +1170,18 @@ overflow:scroll" hidden="hidden">
   overflow:scroll" hidden="hidden">
       <div>
         <h2>Statistics</h2>
+        <b>Hints Shown:</b>
         <div id="statistics1">Correct Guesses: </div>
         <div id="statistics2">Average Guesses: </div>
-        <div id="statistics3">Accuracy: </div>
-        <div id="statistics4">Current Day Streak: </div>
-        <div id="statistics5" style="padding-bottom:3vh">Max Day Streak: </div>
+        <div id="statistics3" style="padding-bottom:1vh">Accuracy: </div>
+
+        <b>Gradual Hints:</b>
+        <div id="statistics4">Correct Guesses: </div>
+        <div id="statistics5">Average Guesses: </div>
+        <div id="statistics6" style="padding-bottom:1vh">Accuracy: </div>
+
+        <div id="statistics7">Current Day Streak: </div>
+        <div id="statistics8" style="padding-bottom:3vh">Max Day Streak: </div>
         <table style="min-width:200px">
           <caption><b>Guess Distribution</b></caption>
           <tr>
