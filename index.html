@@ -221,11 +221,11 @@
           let d = dailyRandom();
           let add = 0;
           if (moleculeN > 1) {
-            console.log("R2: " + random2(moleculeNum))
-            console.log("d: " + d)
+            //console.log("R2: " + random2(moleculeNum))
+            //console.log("d: " + d)
             add = (random2(moleculeN) * (d % 999331) + (17 * moleculeN)) % 100000
           }
-          console.log("Add:" + add)
+          //console.log("Add:" + add)
           return (d + add) % maxValue + 1;
         }
 
