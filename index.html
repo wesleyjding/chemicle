@@ -220,10 +220,10 @@
 
           let d = dailyRandom();
           let add = 0;
-          if (moleculeNum > 1) {
+          if (moleculeN > 1) {
             //console.log("R2: " + random2(moleculeNum))
             //console.log("d: " + d)
-            add = (random2(moleculeNum) * (d % 1001)) % 100000
+            add = (random2(moleculeN) * (d % 1001)) % 100000
           }
           //console.log("Add:" + add)
           return (d + add) % maxValue + 1;
