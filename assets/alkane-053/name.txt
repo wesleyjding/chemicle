@@ -1,1 +1,1 @@
-"octane", "C8H18", "CCCCCCCC"
+"3,3-diethylheptane", "C11H24", "CCCCC(CC)(CC)CC"

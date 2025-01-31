@@ -1,1 +1,1 @@
-"2,2,3,3-tetramethylhexane", "C10H22", "CCCC(C)(C)C(C)(C)C"
+"hexane", "C6H14", "CCCCCC"

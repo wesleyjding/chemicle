@@ -1,1 +1,1 @@
-"acetylene", "C2H2", "C#C"
+"prop-1-yne", "C3H4", "CC#C"

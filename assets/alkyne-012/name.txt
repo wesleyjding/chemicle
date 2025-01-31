@@ -1,1 +1,1 @@
-"penta-1,3-diyne", "C5H4", "CC#CC#C"
+"hex-1-yne", "C6H10", "CCCCC#C"

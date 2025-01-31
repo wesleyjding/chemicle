@@ -1,1 +1,1 @@
-"2,3-dimethyloctane", "C10H22", "CCCCCC(C)C(C)C"
+"2,2,4-trimethylheptane", "C10H22", "CCCC(C)CC(C)(C)C"

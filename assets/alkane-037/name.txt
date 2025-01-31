@@ -1,1 +1,1 @@
-"4-methylheptane", "C8H18", "CCCC(C)CCC"
+"3,3-dimethylhexane", "C8H18", "CCCC(C)(C)CC"

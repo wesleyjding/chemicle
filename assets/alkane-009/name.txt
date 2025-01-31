@@ -1,1 +1,1 @@
-"2,3-dimethylbutane", "C6H14", "CC(C)C(C)C"
+"2-methylbutane", "C5H12", "CCC(C)C"

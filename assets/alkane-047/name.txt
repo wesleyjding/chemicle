@@ -1,1 +1,1 @@
-"3,3-diethyl-2-methylheptane", "C12H26", "CCCCC(CC)(CC)C(C)C"
+"2,3-dichloro-2-methylhexane", "C7H14Cl2", "CCCC(C(C)(C)Cl)Cl"

@@ -1,1 +1,1 @@
-"butane", "C4H10", "CCCC"
+"1-bromopropane", "C3H7Br", "CCCBr"

@@ -1,1 +1,1 @@
-"4-methylpent-2-yne", "C6H10", "CC#CC(C)C"
+"4,4-dimethylpent-2-yne", "C7H12", "CC#CC(C)(C)C"

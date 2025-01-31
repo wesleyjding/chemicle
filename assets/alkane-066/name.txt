@@ -1,1 +1,1 @@
-"2,3-dimethylnonane", "C11H24", "CCCCCCC(C)C(C)C"
+"octane", "C8H18", "CCCCCCCC"

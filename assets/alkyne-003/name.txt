@@ -1,1 +1,1 @@
-"but-1-yne", "C4H6", "CCC#C"
+"but-2-yne", "C4H6", "CC#CC"

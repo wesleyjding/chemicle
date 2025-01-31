@@ -1,1 +1,1 @@
-"decane", "C10H22", "CCCCCCCCCC"
+"2,4-dimethyloctane", "C10H22", "CCCCC(C)CC(C)C"

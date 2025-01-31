@@ -1,1 +1,1 @@
-"3-methylnonane", "C10H22", "CCCCCCC(C)CC"
+"4-tert-butylheptane", "C11H24", "CCCC(CCC)C(C)(C)C"

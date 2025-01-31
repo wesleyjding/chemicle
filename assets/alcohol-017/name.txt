@@ -1,0 +1,1 @@
+"hexan-1-ol", "C6H14O", "CCCCCCO"

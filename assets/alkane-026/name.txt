@@ -1,1 +1,1 @@
-"2,4-dimethylhexane", "C8H18", "CCC(C)CC(C)C"
+"3-ethyl-2-methylpentane", "C8H18", "CCC(CC)C(C)C"

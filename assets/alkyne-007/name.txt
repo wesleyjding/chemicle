@@ -1,1 +1,1 @@
-"pent-2-yne", "C5H8", "CCC#CC"
+"3-methylpent-1-yne", "C6H10", "CCC(C)C#C"

@@ -1,1 +1,1 @@
-"3-ethyl-4-methylnonane", "C12H26", "CCCCCC(C)C(CC)CC"
+"2,3-dimethyloctane", "C10H22", "CCCCCC(C)C(C)C"

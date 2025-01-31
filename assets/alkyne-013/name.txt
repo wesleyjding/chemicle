@@ -1,1 +1,1 @@
-"hex-1-yne", "C6H10", "CCCCC#C"
+"hex-2-yne", "C6H10", "CCCC#CC"

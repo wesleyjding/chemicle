@@ -1,1 +1,1 @@
-"4-ethylnonane", "C11H24", "CCCCCC(CC)CCC"
+"3,4-dibromoheptane", "C7H14Br2", "CCCC(C(CC)Br)Br"

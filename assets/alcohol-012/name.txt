@@ -1,1 +1,1 @@
-"pentane-1,2-diol", "C5H12O2", "CCCC(CO)O"
+"pentan-2-ol", "C5H12O", "CCCC(C)O"

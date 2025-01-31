@@ -1,1 +1,1 @@
-"4-tert-butylheptane", "C11H24", "CCCC(CCC)C(C)(C)C"
+"3,3-dimethylheptane", "C9H20", "CCCCC(C)(C)CC"

@@ -1,0 +1,1 @@
+"2-methylpentane-1,5-diol", "C6H14O2", "CC(CCCO)CO"

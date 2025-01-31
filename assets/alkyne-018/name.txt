@@ -1,1 +1,1 @@
-"hept-1-yne", "C7H12", "CCCCCC#C"
+"hept-2-yne", "C7H12", "CCCCC#CC"

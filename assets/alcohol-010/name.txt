@@ -1,1 +1,1 @@
-"pentan-1-ol", "C5H12O", "CCCCCO"
+"4,4,4-trifluoro-3-methylbutane-1,2-diol", "C5H9F3O2", "CC(C(CO)O)C(F)(F)F"

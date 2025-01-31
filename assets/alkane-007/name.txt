@@ -1,1 +1,1 @@
-"2-methylbutane", "C5H12", "CCC(C)C"
+"1-iodopropane", "C3H7I", "CCCI"

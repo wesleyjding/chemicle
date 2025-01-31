@@ -1,1 +1,1 @@
-"2,3-dimethylheptane", "C9H20", "CCCCC(C)C(C)C"
+"3,3-diethylhexane", "C10H22", "CCCC(CC)(CC)CC"

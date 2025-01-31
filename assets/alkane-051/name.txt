@@ -1,1 +1,1 @@
-"2-methyl-4-propylheptane", "C11H24", "CCCC(CCC)CC(C)C"
+"2,4-dimethylheptane", "C9H20", "CCCC(C)CC(C)C"

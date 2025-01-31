@@ -1,1 +1,1 @@
-"pentan-2-ol", "C5H12O", "CCCC(C)O"
+"pentan-1-ol", "C5H12O", "CCCCCO"

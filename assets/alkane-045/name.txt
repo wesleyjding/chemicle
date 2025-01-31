@@ -1,1 +1,1 @@
-"2,2,3,3-tetramethylheptane", "C11H24", "CCCCC(C)(C)C(C)(C)C"
+"4-ethyl-2-methylhexane", "C9H20", "CCC(CC)CC(C)C"

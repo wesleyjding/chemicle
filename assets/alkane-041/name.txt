@@ -1,1 +1,1 @@
-"3,3-diethylheptane", "C11H24", "CCCCC(CC)(CC)CC"
+"2,3,4-trimethylhexane", "C9H20", "CCC(C)C(C)C(C)C"

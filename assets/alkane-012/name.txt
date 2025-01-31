@@ -1,1 +1,1 @@
-"2-methylpentane", "C6H14", "CCCC(C)C"
+"2,2,3-trimethylbutane", "C7H16", "CC(C)C(C)(C)C"

@@ -1,1 +1,1 @@
-"3-ethyl-2-methylpentane", "C8H18", "CCC(CC)C(C)C"
+"2,2,4-trimethylpentane", "C8H18", "CC(C)CC(C)(C)C"

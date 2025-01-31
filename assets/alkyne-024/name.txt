@@ -1,1 +1,1 @@
-"5-methyloct-2-yne", "C9H16", "CCCC(C)CC#CC"
+"deca-1,9-diyne", "C10H14", "C#CCCCCCCC#C"

@@ -1,1 +1,1 @@
-"pent-1-yne", "C5H8", "CCCC#C"
+"pent-2-yne", "C5H8", "CCC#CC"

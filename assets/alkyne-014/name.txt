@@ -1,1 +1,1 @@
-"hex-2-yne", "C6H10", "CCCC#CC"
+"3-methylhex-1-yne", "C7H12", "CCCC(C)C#C"

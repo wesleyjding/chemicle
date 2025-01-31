@@ -1,1 +1,1 @@
-"buta-1,3-diyne", "C4H2", "C#CC#C"
+"pent-1-yne", "C5H8", "CCCC#C"

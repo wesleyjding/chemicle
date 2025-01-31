@@ -1,0 +1,1 @@
+"3-chloroheptan-2-ol", "C7H15ClO", "CCCCC(C(C)O)Cl"

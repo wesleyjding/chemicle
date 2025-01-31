@@ -1,1 +1,1 @@
-"prop-1-yne", "C3H4", "CC#C"
+"but-1-yne", "C4H6", "CCC#C"

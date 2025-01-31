@@ -1,1 +1,1 @@
-"4-tert-butyloctane", "C12H26", "CCCCC(CCC)C(C)(C)C"
+"4-propylheptane", "C10H22", "CCCC(CCC)CCC"

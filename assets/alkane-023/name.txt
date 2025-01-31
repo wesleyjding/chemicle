@@ -1,1 +1,1 @@
-"hexane", "C6H14", "CCCCCC"
+"2,3,3-trimethylpentane", "C8H18", "CCC(C)(C)C(C)C"

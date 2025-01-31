@@ -1,1 +1,1 @@
-"3,3,4-trimethylhexane", "C9H20", "CCC(C)C(C)(C)CC"
+"1,2-dichloropentane", "C5H10Cl2", "CCCC(CCl)Cl"

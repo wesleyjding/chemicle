@@ -1,1 +1,1 @@
-"3-methylhexane", "C7H16", "CCCC(C)CC"
+"2,3,4-trimethylpentane", "C8H18", "CC(C)C(C)C(C)C"
