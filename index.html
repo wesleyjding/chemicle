@@ -169,7 +169,7 @@
       document.getElementById("guessInput").value = "";
 
       let today = new Date();
-      if(moleculeNum === 1 && today.getMonth() === 0 && today.getUTCDate() === 31) {
+      if(moleculeNum === 1 && today.getMonth() === 0 && today.getUTCDate() === 31 && typeList[0].enabled === true) {
         moleculeId = "alkane-007";
       }
       else {
