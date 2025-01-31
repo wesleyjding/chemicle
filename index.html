@@ -170,7 +170,7 @@
 
       let today = new Date();
       if(moleculeNum === 1 && today.getMonth() === 0 && today.getUTCDate() === 31 && typeList[0].enabled === true) {
-        moleculeId = "alkane-007";
+        moleculeId = "alkane-009";
       }
       else {
         let totalMax = 0;
@@ -1108,14 +1108,16 @@ overflow:scroll" hidden="hidden">
         <p>The website automatically selects a molecule, and your job is to guess its name.</p>
         <p>
           Enter a guess in the box. It will be split into segments (separated by spaces), and each
-          segment is colored according to wordle rules.
-          <b class="green">Green</b> if it is in the correct spot,
+          segment is colored according to wordle rules:
+          <b class="green">green</b> if it is in the correct spot,
           <b class="yellow">yellow</b> if it appears in the molecule name but in another spot, and
-          <b class="red">red</b> if it doesn't appear at all.
+          <b class="red">red</b> if it doesn't appear at all. Segments are not part of other segments,
+          so if <b class="green">meth ane</b>, is the word, <b class="red">eth</b> will appear red.
+          Every number, comma, and dash are their own segment.
         </p>
         <p>
           Additionally, a message of <b>too short</b>, <b>too long</b>, or <b>correct length</b> will
-          tell you if your guess needs more or less <u>segments</u>. It does <b>not</b> refer to the
+          tell you if your guess needs more or less <u><b>segments</b></u>. It does <b>not</b> refer to the
           actual length of the word, nor the chain length of the molecule. For example,
           <b class="green">2 , 3 - di meth yl</b> will be split into 7 segments, which is longer than
           the four segments in <b class="green">non an oic acid</b>, even though they have the same
@@ -1128,8 +1130,8 @@ overflow:scroll" hidden="hidden">
           you need to add one or more segments.
         </p>
         <p>
-          All the names are in official IUPAC form. For example, you cannot write <b class="yellow">1-pentanol</b>,
-          you must write <b class="green">pentan-1-ol</b>.
+          All the names are in official IUPAC form, so <b class="yellow">1-pentanol</b> would be invalid, and only
+          <b class="green">pentan-1-ol</b> would be right. There is only one correct solution.
         </p>
         <h3>Customization</h3>
         <p>
@@ -1141,9 +1143,9 @@ overflow:scroll" hidden="hidden">
         </p>
         <img id="example2" src="assets/example2.png" alt="Settings Picture" class="center" style="width:20%;">
         <p>
-          Click on the <b>Generate New Molecule</b> button (the plus in the top left) to generate a new molecule
-          to guess. You can keep generating new molecules as long as you want (though some will inevitably be repeats).
-          The randomness is always seeded based on the day. That means that the 1st, 2nd, 3rd, etc., molecules of the
+          Click on the plus in the top left to generate a new molecule to guess. You can keep generating new molecules
+          as long as you want (though some will inevitably be repeats). The randomness is always seeded based on the day.
+          That means that the 1st, 2nd, 3rd, etc., molecules of the
           day will be the same for everyone.
         </p>
         <span>If you find any bugs or have any suggestions, email
@@ -1153,6 +1155,22 @@ overflow:scroll" hidden="hidden">
           or open an issue on the
           <a href="https://github.com/wesleyjding/chemicle/issues">
             <span>GitHub page</span></a>.<br>
+        </span>
+        <div style="padding-bottom:10px"></div>
+        <span style="font-size: x-small">Created by Wesley Ding, licensed under a
+          <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">
+            <span>GPL-3.0</span></a>
+          license. The
+          <a href="https://pubchem.ncbi.nlm.nih.gov/">
+            <span>PubChem</span></a>
+          database API,
+          <a href="https://cdk.github.io/">
+            <span>Chemistry Development Kit</span></a>
+          library, and
+          <a href="https://fonts.google.com/icons">
+            <span>Google Font Icons</span></a>
+          were used in development of this project. Special thanks to Mr. Albritton, Mr. Gesell, and Aadit
+          Sangvikar for their assistance. Last updated 1/31/2025.<br>
         </span>
         <div style="padding-top:1vh" ></div>
         <button id="tutorialCloseButton">Close</button>
