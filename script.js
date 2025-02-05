@@ -449,12 +449,10 @@ function reloadAssets() {
             let regular = total - blind;
             statsRegular[i].style.width = regular / max * totalPixels + "px";
             //console.log("Width is: " + regular / max * totalPixels + "px")
-            statsRegular[i].style.minWidth = "20";
             statsRegular[i].innerHTML = regular.toString();
 
             statsBlind[i].style.width = blind / max * totalPixels + "px";
             //console.log("Width is: " + blind / max * totalPixels + "px")
-            statsBlind[i].style.minWidth = "20";
             statsBlind[i].innerHTML = blind.toString();
         }
     }
