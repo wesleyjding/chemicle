@@ -476,7 +476,12 @@ function reloadAssets() {
     })
 
     let today = new Date();
+    if(today.getUTCHours() < 5) {
+        today.setTime(today.getTime() - (24 * 60 * 60 * 1000))
+        today.setUTCHours(8);
+    }
     moleculeIdDiv.innerHTML = (today.getUTCMonth() + 1) + "/" + today.getUTCDate() + "/" + today.getUTCFullYear() + ": #" + moleculeNum;
+
 
     formulaButton.addEventListener('click', () => {
         toggleVisibility(formulaButton, formulaDiv, "Chemical Formula", false)
