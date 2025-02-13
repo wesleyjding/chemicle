@@ -731,7 +731,7 @@ function splitOrganicString(input) {
         "di", "tri", "tetra",                                                     // Multipliers for side chains
         "iso", "cyclo", "poly", "benz", "form", "acet",                           // Miscellaneous prefixes
         "fluoro", "chloro", "bromo", "iodo",                                      // Halides
-        "oxy", "hydroxy", "amine", "oxo",                                         // Functional groups
+        "oxy", "hydroxy", "amine", "amide", "oxo",                                // Functional groups
         "acid", "oate", "ether",  "nitrile",                                      // More functional groups
         "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", "-", "(", ")",     // Positions (1-9)
         "meth", "eth", "prop", "but", "pent", "hex", "hept", "oct", "non", "dec", // Standard prefixes for chain lengths
