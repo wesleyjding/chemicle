@@ -130,6 +130,10 @@ function checkStorageSettings() {
             break;
         }
         else obj.enabled = getStorage(obj.type) === true; */
+        if(i === 0 && getStorage(obj.type) === "") {
+            obj.enabled = true;
+            setStorage(obj.type, true, false);
+        }
         obj.enabled = getStorage(obj.type) === true;
     }
 
