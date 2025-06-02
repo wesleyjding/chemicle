@@ -113,6 +113,7 @@ function checkStorageSettings() {
 
     for (let i = 0; i < typeList.length; i++) {
         let obj = typeList[i];
+        /*
         if(getStorage("albrittonMode") === "" || getStorage("albrittonMode") === true || getStorage(obj.type) === "") {
             for (let j = 0; j < typeList.length; j++) {
                 let obj2 = typeList[j];
@@ -128,8 +129,11 @@ function checkStorageSettings() {
             setStorage("albrittonMode", true, false);
             break;
         }
-        else obj.enabled = getStorage(obj.type) === true;
+        else obj.enabled = getStorage(obj.type) === true; */
+        obj.enabled = getStorage(obj.type) === true;
     }
+
+
 
     if(getStorage("gradualHints") === "") {
         gradualHints = false;
@@ -251,7 +255,6 @@ function reloadAssets() {
     let settingsButton = document.getElementById('settingsButton');
     let settingsCloseButton = document.getElementById('settingsCloseButton');
     let settingsDiv = document.getElementById('settings');
-    let settingsFieldset = document.getElementById('settingsFieldset');
     let settingsBackgroundDiv = document.getElementById('settingsBackground');
     let clearStorageButton = document.getElementById('clearStorageButton');
 
@@ -270,7 +273,7 @@ function reloadAssets() {
 
     let moleculeIdDiv = document.getElementById('moleculeIdDiv');
 
-    let albrittonModeCheck = document.getElementById('albrittonModeCheck');
+    //let albrittonModeCheck = document.getElementById('albrittonModeCheck');
     let gradualHintsCheck = document.getElementById('gradualHintsCheck');
 
     formulaButton = document.getElementById('formulaButton');
@@ -502,7 +505,7 @@ function reloadAssets() {
         toggleVisibility(solutionButton, solutionDiv, "Solution", false)
     });
 
-    albrittonModeCheck.addEventListener('change', () => {
+    /*albrittonModeCheck.addEventListener('change', () => {
         settingsFieldset.disabled = albrittonModeCheck.checked;
         if(albrittonModeCheck.checked) {
             numBoxesChecked = 0;
@@ -526,12 +529,13 @@ function reloadAssets() {
         }
         changedSettings = true;
         setStorage("changedSettings", true, false);
-    });
+    });*/
 
+    /*
     if(getStorage("albrittonMode") === true) {
         albrittonModeCheck.checked = true;
         settingsFieldset.disabled = albrittonModeCheck.checked;
-    }
+    }*/
 
     gradualHintsCheck.addEventListener('change', () => {
         gradualHints = gradualHintsCheck.checked;
