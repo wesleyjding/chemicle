@@ -1,3 +1,5 @@
+// Notice: I am not an HTML/CSS, or even javascript developer. I'm actually not a developer at all. Read at your own risk.
+
 // Organic Chemical Type (type, max)
 class oct {
     constructor(type, max, date = null) {
@@ -455,11 +457,9 @@ function reloadAssets() {
             let blind = individualGuessStatsBlind[i];
             let regular = total - blind;
             statsRegular[i].style.width = regular / max * totalPixels + "px";
-            //console.log("Width is: " + regular / max * totalPixels + "px")
             statsRegular[i].innerHTML = regular.toString();
 
             statsBlind[i].style.width = blind / max * totalPixels + "px";
-            //console.log("Width is: " + blind / max * totalPixels + "px")
             statsBlind[i].innerHTML = blind.toString();
         }
     }
@@ -1010,7 +1010,6 @@ function getStorage (id) {
 
     let expiryItem = item.split("expires=")
     if(expiryItem.length === 1) { // no expiry
-        //console.log(id + ": " + out[0] + " (no expiry)");
         if(item === "true") return true;
         else if (item === "false") return false;
         return item;
@@ -1023,7 +1022,6 @@ function getStorage (id) {
             return "";
         }
         else {
-            //console.log(id + ": " + expiryItem[0]);
             if(expiryItem[0] === "true") return true;
             else if (expiryItem[0] === "false") return false;
             return expiryItem[0];
