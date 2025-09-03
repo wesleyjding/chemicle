@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Notice: I am not an HTML/CSS, or even javascript developer. I'm actually not a developer at all. Read at your own risk. -->
 <html lang="">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +16,50 @@
       font-family: Calibri, Helvetica, Arial, sans-serif;
     }
 
+    .button {
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 550;
+        text-transform: capitalize;
+        letter-spacing: 1px;
+        padding: 6px 12px;
+        border: 2px solid;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        color: inherit;
+    }
+
+    .button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    button {
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 550;
+        text-transform: capitalize;
+        letter-spacing: 1px;
+        padding: 6px 12px;
+        border: 2px solid;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        color: inherit;
+    }
+
+    button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
   </style>
+
   <head>
     <title>chemicle</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon-light.png" media="(prefers-color-scheme: light)">
@@ -312,14 +356,15 @@ overflow:auto" hidden="hidden">
              name="guessInput"
              required minlength="4"
              maxlength="40"
-             size="15">
+             size="15" class="button">
       <input type="submit"
              id="submitButton"
              name="submitButton"
-             value="Submit">
+             value="Submit" class="button">
     </form>
     <p id="validWarning" hidden="hidden" style="color:red;text-align: center;">The input is invalid. Please check spelling and make sure your guess is a real molecule.</p>
 
+    <div style="padding: 0.6%"></div>
     <button id="formulaButton" style="text-align: center; display: none" class="center" >Show Chemical Formula</button>
     <div style="padding: 0.6%"></div>
     <div id="formula" style="text-align: center" hidden="hidden"></div>
