@@ -209,7 +209,7 @@ function generateId() {
             if (moleculeN > 1) {
                 //console.log("R2: " + random2(moleculeNum))
                 //console.log("d: " + d)
-                add = (random2(moleculeN) * (d % 999331) + (17 * moleculeN)) + moleculeN % 100000
+                add = ((random2(moleculeN) * (d % 999331) + (17 * moleculeN)) + moleculeN) % 100000
             }
             //console.log("Add:" + add)
             idNum = (d + add) % maxValue + 1;
