@@ -189,19 +189,15 @@ function generateId() {
 
             // Deterministic random algorithm
             function random(seed) {
-                let t = (seed ^ 0xEFC5DAF7) + (seed << 3);
-                t = (t ^ (t >>> 16)) * 0x42EDBF1D;
-                t = (t ^ (t >>> 13)) * 0xD9AAB461;
-                t = t ^ (t >>> 16);
-                return t;
+                let x = seed
+                x ^= x << 13;
+                x ^= x >>> 17;
+                x ^= x << 5;
+                return x >>> 0
             }
 
             function random2(seed) {
-                let t = (seed ^ 0xFEAD2DD3) + (seed << 4);
-                t = (t ^ (t >>> 7)) * 0x6A8BC9AB;
-                t = (t ^ (t >>> 12)) * 0xCCB4A321;
-                t = t ^ (t >>> 9);
-                return t;
+                return random(seed + 25846263) * random(seed + 3141413) + random(seed + 124016)
             }
 
             let d = dailyRandom();
@@ -209,7 +205,7 @@ function generateId() {
             if (moleculeN > 1) {
                 //console.log("R2: " + random2(moleculeNum))
                 //console.log("d: " + d)
-                add = ((random2(moleculeN) * (d % 999331) + (17 * moleculeN)) + moleculeN) % 100000
+                add = Math.abs(Math.round(((random2(2401 + 11^(3*(moleculeN))) + (1665 + 17 * 7^moleculeN))) % 141233))
             }
             //console.log("Add:" + add)
             idNum = (d + add) % maxValue + 1;
