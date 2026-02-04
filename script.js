@@ -209,7 +209,7 @@ function generateId() {
             if (moleculeN > 1) {
                 //console.log("R2: " + random2(moleculeNum))
                 //console.log("d: " + d)
-                add = (random2(moleculeN) * (d % 999331) + (17 * moleculeN)) % 100000
+                add = (random2(moleculeN) * (d % 999331) + (17 * moleculeN)) + moleculeN % 100000
             }
             //console.log("Add:" + add)
             idNum = (d + add) % maxValue + 1;
@@ -262,6 +262,8 @@ function reloadAssets() {
     let settingsCloseButton = document.getElementById('settingsCloseButton');
     let settingsDiv = document.getElementById('settings');
     let settingsBackgroundDiv = document.getElementById('settingsBackground');
+    let toggleThemeButton = document.getElementById('toggleThemeButton');
+    let resetMoleculeNumButton = document.getElementById('resetMoleculeNumButton');
     let clearStorageButton = document.getElementById('clearStorageButton');
 
     tutorialButton = document.getElementById('tutorialButton');
@@ -270,7 +272,7 @@ function reloadAssets() {
     let tutorialBackgroundDiv = document.getElementById('tutorialBackground');
 
     let generateNewMoleculeButton = document.getElementById('generateNewButton');
-    let resetMoleculeNumButton = document.getElementById('resetMoleculeNum');
+
 
     let statisticsButton = document.getElementById('statisticsButton');
     let statisticsCloseButton = document.getElementById('statisticsCloseButton');
@@ -345,6 +347,24 @@ function reloadAssets() {
             location.reload();
         }
     });
+
+    toggleThemeButton.addEventListener('click', () => {
+        if(getStorage('theme') === 'dark') {
+            localStorage.setItem('theme', 'light')
+        }
+        else {
+            localStorage.setItem('theme', 'dark')
+        }
+        location.reload();
+    })
+
+    resetMoleculeNumButton.addEventListener('click', () => {
+        moleculeNum = 1;
+        setStorage("moleculeNum", moleculeNum);
+        changedSettings = true;
+        setStorage("changedSettings", true, false);
+        location.reload();
+    })
 
     clearStorageButton.addEventListener('click', () => {
         if(confirm("Are you sure? This will clear all stored settings and storage, including statistics.")) {
@@ -471,14 +491,6 @@ function reloadAssets() {
         setStorage("changedSettings", true, false);
         location.reload();
     });
-
-    resetMoleculeNumButton.addEventListener('click', () => {
-        moleculeNum = 1;
-        setStorage("moleculeNum", moleculeNum);
-        changedSettings = true;
-        setStorage("changedSettings", true, false);
-        location.reload();
-    })
 
     let today = new Date();
     if(today.getUTCHours() < 5) {
