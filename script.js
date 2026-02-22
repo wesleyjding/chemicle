@@ -83,6 +83,7 @@ let individualGuessStatsTotal = [];
 let individualGuessStatsBlind = [];
 
 let tutorialButton;
+let guessInput;
 
 let gradualHints;
 let changedSettings = false;
@@ -104,6 +105,26 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
     reloadAssets();
     updateFromStorage();
+    
+    guessInput = document.getElementById('guessInput');
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            const settingsDiv = document.getElementById('settings');
+            const tutorialDiv = document.getElementById('tutorial');
+            const statisticsDiv = document.getElementById('statistics');
+            
+            if (settingsDiv.hidden && tutorialDiv.hidden && statisticsDiv.hidden && guessInput.hidden === true) {
+                moleculeNum++;
+                setStorage("moleculeNum", moleculeNum);
+                changedSettings = true;
+                setStorage("changedSettings", true, false);
+                location.reload();
+            }
+        }
+    });
+    
+    guessInput.focus();
 });
 
 function checkStorageSettings() {
