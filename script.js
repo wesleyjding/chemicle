@@ -905,7 +905,7 @@ function showGuess(fromStorage = false){
 
         const span = document.createElement('span');
         span.className = 'green';
-        span.innerHTML = "<b>Correct!</b>";
+        span.innerHTML = "<b>Correct!</b><br><small>Press Enter for next molecule</small>";
         newDiv.appendChild(span);
         showHint(1);
         showHint(2);
